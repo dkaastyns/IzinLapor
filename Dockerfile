@@ -34,9 +34,10 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# 5. Mengubah port Apache agar mendengarkan PORT dari Render (Render menyuntikkan env var $PORT, default 80)
-RUN sed -i 's/Listen 80/Listen ${PORT:-80}/g' /etc/apache2/ports.conf
-RUN sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:${PORT:-80}>/g' /etc/apache2/sites-available/000-default.conf
+# 5. Mengubah port Apache agar mendengarkan PORT dari Render (Render/Railway menyuntikkan env var $PORT)
+ENV PORT="80"
+RUN sed -i 's/Listen 80/Listen ${PORT}/g' /etc/apache2/ports.conf
+RUN sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:${PORT}>/g' /etc/apache2/sites-available/000-default.conf
 
 # 6. Menginstal Node.js (untuk mem-build asset Vite/Vue)
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} | bash - \
