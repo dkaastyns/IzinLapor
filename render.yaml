@@ -1,11 +1,7 @@
 services:
   - type: web
     name: pengaduan-sman11
-    runtime: image
-    image:
-      url: docker.io/richarvey/nginx-php-fpm:3.1.6
-    buildCommand: ./build.sh
-    startCommand: /start.sh
+    env: docker
     envVars:
       - key: APP_NAME
         value: "Pengaduan SMAN 11"
