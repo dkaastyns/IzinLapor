@@ -24,7 +24,22 @@ RUN apt-get update && apt-get install -y \
 
 # 2. Menginstal dan mengonfigurasi ekstensi PHP yang dibutuhkan Laravel dan Supabase
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_pgsql zip bcmath pcntl
+    && docker-php-ext-install gd pdo pdo_pgsql zip bcmath pcntl opcache
+
+# 2b. Mengonfigurasi PHP untuk upload gambar dan performa produksi
+RUN { \
+    echo 'upload_max_filesize = 10M'; \
+    echo 'post_max_size = 12M'; \
+    echo 'memory_limit = 256M'; \
+    echo 'max_execution_time = 60'; \
+    echo 'max_input_time = 60'; \
+    echo 'opcache.enable=1'; \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=60'; \
+    echo 'opcache.fast_shutdown=1'; \
+} > /usr/local/etc/php/conf.d/laravel-production.ini
 
 # 3. Mengaktifkan mod_rewrite Apache untuk routing Laravel
 RUN a2enmod rewrite
@@ -33,6 +48,9 @@ RUN a2enmod rewrite
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# 4b. Menambahkan ServerName untuk menghilangkan warning AH00558 di log Railway
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # 5. Mengubah port Apache agar mendengarkan PORT dari Render (Render/Railway menyuntikkan env var $PORT)
 ENV PORT="80"

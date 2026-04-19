@@ -216,18 +216,17 @@ onMounted(() => {
     window.addEventListener('admin-notification-read', handleAdminNotificationRead);
 
     if (!isAdmin.value) {
-        // User: poll for status update notifications
+        // User: poll setiap 60 detik (hemat resource Railway)
         fetchUnreadCount();
-        pollInterval = setInterval(fetchUnreadCount, 30000);
+        pollInterval = setInterval(fetchUnreadCount, 60000);
     } else {
-        // Admin: poll for new complaint notifications
-        // Use -1 sentinel so first poll won't show toast for existing unread
+        // Admin: poll setiap 45 detik (hemat resource, masih responsif)
+        // Sentinel -1 agar poll pertama tidak trigger toast untuk notif lama
         prevAdminCount = -1;
         fetchAdminUnreadCount().then(() => {
-            // After first fetch, set prevAdminCount properly to avoid spurious toasts
             prevAdminCount = adminUnreadCount.value;
         });
-        adminPollInterval = setInterval(fetchAdminUnreadCount, 20000);
+        adminPollInterval = setInterval(fetchAdminUnreadCount, 45000);
     }
 
     // Initialize Pusher Beams (dynamic import — safe on HTTP)
