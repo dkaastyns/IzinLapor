@@ -154,15 +154,20 @@ class ComplaintController extends Controller
                 }
 
                 try {
-                    // Mengunggah ke Cloudinary dengan optimasi otomatis
-                    $result = Cloudinary::upload($image->getRealPath(), [
+                    // Mengunggah ke Cloudinary via SDK v3
+                    $result = Cloudinary::uploadApi()->upload($image->getRealPath(), [
                         'folder' => $folder,
                         'transformation' => [
-                            'quality' => 'auto',
-                            'fetch_format' => 'auto',
+                            ['quality' => 'auto', 'fetch_format' => 'auto']
                         ],
                     ]);
-                    $paths[] = $result->getSecurePath();
+                    
+                    // Cloudinary SDK v3 return array
+                    if (isset($result['secure_url'])) {
+                        $paths[] = $result['secure_url'];
+                    } else {
+                        throw new \Exception("URL gagal didapatkan dari Cloudinary");
+                    }
                 } catch (\Exception $e) {
                     $errMsg = $e->getMessage();
                     \Log::error('Cloudinary Upload Error: ' . $errMsg);
@@ -428,7 +433,7 @@ class ComplaintController extends Controller
                     // Mengekstrak public_id dari URL Cloudinary untuk dihapus
                     $publicId = $this->extractCloudinaryPublicId($path);
                     if ($publicId) {
-                        Cloudinary::destroy($publicId);
+                        Cloudinary::uploadApi()->destroy($publicId);
                     }
                 } else {
                     // Fallback: Menghapus dari storage lokal (data lama)
