@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: pengaduan-sman11
+    runtime: image
+    image:
+      url: docker.io/richarvey/nginx-php-fpm:3.1.6
+    buildCommand: ./build.sh
+    startCommand: /start.sh
+    envVars:
+      - key: APP_NAME
+        value: "Pengaduan SMAN 11"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      - key: LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FILESYSTEM_DISK
+        value: cloudinary
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: PUSHER_BEAMS_INSTANCE_ID
+        sync: false
+      - key: PUSHER_BEAMS_SECRET_KEY
+        sync: false
