@@ -117,22 +117,28 @@ class ComplaintController extends Controller
     // User: Memproses penyimpanan data laporan baru dari formulir
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|min:20',
-            'location' => 'required|string',
-            'location_detail' => 'nullable|string|max:500',
-            'images' => 'required|array|min:1|max:3',
-            'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
-        ], [
-            'images.required' => 'Foto bukti wajib diunggah minimal 1 foto.',
-            'images.min' => 'Foto bukti wajib diunggah minimal 1 foto.',
-            'images.max' => 'Maksimal 3 foto yang dapat diunggah.',
-            'images.*.image' => 'File harus berupa gambar.',
-            'images.*.max' => 'Ukuran setiap foto maksimal 1 MB.',
-            'images.*.mimes' => 'Format foto harus JPG, JPEG, atau PNG.',
-        ]);
+        // Login detail validation error ke log Railway untuk debugging
+        try {
+            $request->validate([
+                'category_id' => 'required|exists:categories,id',
+                'title' => 'required|string|max:255',
+                'description' => 'required|string|min:20',
+                'location' => 'required|string',
+                'location_detail' => 'nullable|string|max:500',
+                'images' => 'required|array|min:1|max:3',
+                'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
+            ], [
+                'images.required' => 'Foto bukti wajib diunggah minimal 1 foto.',
+                'images.min' => 'Foto bukti wajib diunggah minimal 1 foto.',
+                'images.max' => 'Maksimal 3 foto yang dapat diunggah.',
+                'images.*.image' => 'File harus berupa gambar.',
+                'images.*.max' => 'Ukuran setiap foto maksimal 1 MB.',
+                'images.*.mimes' => 'Format foto harus JPG, JPEG, atau PNG.',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Log::error('Validation Failed: ' . json_encode($e->errors()));
+            throw $e;
+        }
 
         // Menyaring file kosong dan mengunggah ke Cloudinary
         $paths = [];

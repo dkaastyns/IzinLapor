@@ -52,6 +52,10 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # 4b. Menambahkan ServerName untuk menghilangkan warning AH00558 di log Railway
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# 4c. Set default Log Channel ke stderr agar muncul di dashboard Railway
+ENV LOG_CHANNEL=stderr
+ENV SESSION_DRIVER=cookie
+
 # 5. Mengubah port Apache agar mendengarkan PORT dari Render (Render/Railway menyuntikkan env var $PORT)
 ENV PORT="80"
 RUN sed -i 's/Listen 80/Listen ${PORT}/g' /etc/apache2/ports.conf
