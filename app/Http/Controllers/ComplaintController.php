@@ -136,6 +136,7 @@ class ComplaintController extends Controller
 
         // Menyaring file kosong dan mengunggah ke Cloudinary
         $paths = [];
+        $uploadErrors = [];
         $folder = config('cloudinary.folder', 'pengaduan-sman11') . '/complaints';
         $files = $request->file('images') ?? [];
         foreach ($files as $image) {
@@ -143,7 +144,7 @@ class ComplaintController extends Controller
                 // Keamanan: Validasi bahwa file benar-benar gambar
                 $imageInfo = @getimagesize($image->getPathname());
                 if ($imageInfo === false) {
-                    continue; // Melewati file yang lolos ekstensi MIME tetapi sebenarnya bukan murni gambar
+                    continue; // Melewati file yang bukan gambar murni
                 }
 
                 try {
@@ -157,15 +158,21 @@ class ComplaintController extends Controller
                     ]);
                     $paths[] = $result->getSecurePath();
                 } catch (\Exception $e) {
-                    \Log::error('Cloudinary Upload Error: ' . $e->getMessage());
-                    continue;
+                    $errMsg = $e->getMessage();
+                    \Log::error('Cloudinary Upload Error: ' . $errMsg);
+                    $uploadErrors[] = $errMsg;
                 }
             }
         }
 
-        // Memastikan minimal 1 foto berhasil tersimpan
+        // Jika semua foto gagal upload, tampilkan error diagnostik
         if (empty($paths)) {
-            return back()->withErrors(['images' => 'Foto bukti wajib diunggah minimal 1 foto.'])->withInput();
+            $debugMsg = 'Foto gagal diunggah ke Cloudinary.';
+            if (!empty($uploadErrors) && config('app.debug') === false) {
+                // Tampilkan error singkat agar bisa didiagnosis (hapus setelah fixed)
+                $debugMsg .= ' Error: ' . substr(implode(' | ', $uploadErrors), 0, 200);
+            }
+            return back()->withErrors(['images' => $debugMsg])->withInput();
         }
 
         Complaint::create([
