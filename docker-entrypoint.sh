@@ -22,5 +22,9 @@ echo "[Entrypoint] Menjalankan migrasi database..."
 php artisan migrate --force
 
 echo "[Entrypoint] Semuanya siap! Menjalankan server Apache..."
+# Menonaktifkan modul MPM yang berkonflik (sering terjadi di environment cloud)
+a2dismod mpm_event mpm_worker || true
+a2enmod mpm_prefork || true
+
 # Eksekusi proses Apache sehingga terikat (bind) dengan lifecycle container
 exec apache2-foreground
