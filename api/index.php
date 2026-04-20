@@ -5,30 +5,37 @@
 
 define('LARAVEL_START', microtime(true));
 
-// Set path penting agar relatif ke root project (1 level di atas api/)
 $projectRoot = dirname(__DIR__);
 
-// Paksa storage path agar bisa ditulis di runtime Vercel (/tmp)
-// Vercel hanya mengizinkan write ke /tmp — semua yang lain read-only
-if (!is_writable($projectRoot . '/storage')) {
-    // Override storage path ke /tmp yang writable di Vercel
-    $_ENV['APP_STORAGE_PATH'] = '/tmp/laravel-storage';
-    putenv('APP_STORAGE_PATH=/tmp/laravel-storage');
-}
+// ============================================================
+// FIX KRITIS: Vercel filesystem read-only kecuali /tmp
+// Bootstrap cache (packages.php, services.php) perlu DITULIS
+// saat Laravel discover package providers — harus di /tmp
+// ============================================================
 
-// Pastikan direktori /tmp/laravel-storage/* ada
-$tmpStorage = '/tmp/laravel-storage';
+// 1. Setup storage path di /tmp
+$_ENV['APP_STORAGE_PATH'] = '/tmp/laravel-storage';
+putenv('APP_STORAGE_PATH=/tmp/laravel-storage');
+
+// 2. Setup bootstrap cache path di /tmp (INI YANG MENYEBABKAN "view does not exist")
+$_ENV['APP_BOOTSTRAP_PATH'] = '/tmp/laravel-bootstrap';
+putenv('APP_BOOTSTRAP_PATH=/tmp/laravel-bootstrap');
+
+// Buat semua direktori yang diperlukan di /tmp
 $dirs = [
-    $tmpStorage,
-    $tmpStorage . '/framework',
-    $tmpStorage . '/framework/cache',
-    $tmpStorage . '/framework/cache/data',
-    $tmpStorage . '/framework/sessions',
-    $tmpStorage . '/framework/views',
-    $tmpStorage . '/logs',
-    $tmpStorage . '/app',
-    $tmpStorage . '/app/public',
+    '/tmp/laravel-storage',
+    '/tmp/laravel-storage/framework',
+    '/tmp/laravel-storage/framework/cache',
+    '/tmp/laravel-storage/framework/cache/data',
+    '/tmp/laravel-storage/framework/sessions',
+    '/tmp/laravel-storage/framework/views',
+    '/tmp/laravel-storage/logs',
+    '/tmp/laravel-storage/app',
+    '/tmp/laravel-storage/app/public',
+    '/tmp/laravel-bootstrap',
+    '/tmp/laravel-bootstrap/cache',  // <-- Kritis: tempat packages.php & services.php
 ];
+
 foreach ($dirs as $dir) {
     if (!is_dir($dir)) {
         mkdir($dir, 0755, true);
@@ -36,8 +43,8 @@ foreach ($dirs as $dir) {
 }
 
 // Pantau maintenance mode
-if (file_exists($projectRoot . '/storage/framework/maintenance.php')) {
-    require $projectRoot . '/storage/framework/maintenance.php';
+if (file_exists('/tmp/laravel-storage/framework/maintenance.php')) {
+    require '/tmp/laravel-storage/framework/maintenance.php';
 }
 
 // Register Composer autoloader

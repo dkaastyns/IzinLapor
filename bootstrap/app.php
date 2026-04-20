@@ -28,5 +28,11 @@ if ($storagePath = env('APP_STORAGE_PATH')) {
     $app->useStoragePath($storagePath);
 }
 
+// Override bootstrap cache path di Vercel (packages.php & services.php perlu ditulis)
+if ($bootstrapPath = env('APP_BOOTSTRAP_PATH')) {
+    $app->useBootstrapPath($bootstrapPath);
+}
+
 return $app;
+
 
