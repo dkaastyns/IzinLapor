@@ -3,6 +3,7 @@
     "framework": null,
     "installCommand": "npm install",
     "buildCommand": "bash vercel-build.sh",
+    "outputDirectory": "public",
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.2",
