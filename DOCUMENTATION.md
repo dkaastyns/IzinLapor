@@ -12,7 +12,7 @@ Aplikasi ini diimplementasikan menggunakan arsitektur **Single Page Application 
 
 ### Backend
 - **Framework:** Laravel 11.x (PHP 8)
-- **Database:** PostgreSQL
+- **Database:** PostgreSQL (Supabase)
 - **Real-Time WebSockets:** Laravel Reverb / Pusher
 
 ### Frontend
@@ -22,7 +22,8 @@ Aplikasi ini diimplementasikan menggunakan arsitektur **Single Page Application 
 
 ### Infrastruktur / Pihak Ketiga
 - **Penyimpanan Storage Gambar:** Cloudinary API
-- **Deployment Server:** Render.com
+- **Deployment Server:** Vercel.com
+- **Database Platform:** Supabase
 
 ---
 
@@ -105,12 +106,12 @@ php artisan migrate:fresh --seed
 ---
 
 ## 7. Deployment (Produksi)
-Proyek ini didesain otomatis (CI/CD) jika diselaraskan ke GitHub dan di-deploy ke server platform serbaguna seperti **Render.com**.
+Proyek ini didesain otomatis (CI/CD) jika diselaraskan ke GitHub dan di-deploy ke platform **Vercel** serverless, dan menggunakan **Supabase** untuk PostgreSQL database-nya.
 Pastikan setting lingkungan di lingkungan produksi memuat:
 * `APP_ENV=production`
 * `APP_DEBUG=false`
-* `SESSION_DRIVER=cookie` (untuk performa ringan) atau `database`
-* Menjalankan build Frontend untuk produksi: `npm run build`
+* `SESSION_DRIVER=cookie` (wajib untuk serverless Vercel)
+* Menjalankan build Frontend untuk produksi: `npm run build` (sudah diotomatisasikan via script Vercel)
 
 ---
 *Dibuat untuk melengkapi tugas Sistem Terintegrasi & Rekayasa Perangkat Lunak 2026.*

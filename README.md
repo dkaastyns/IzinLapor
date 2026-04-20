@@ -18,9 +18,9 @@ Aplikasi ini menggunakan perpaduan (*stack*) teknologi yang modern dan responsif
 - **Tim Backend:** Framework Laravel 11.x (PHP 8)
 - **Tim Frontend:** Vue.js 3 (*Composition API*) dengan jembatan Inertia.js untuk perpindahan halaman tanpa *loading*.
 - **Styling Visual:** Tailwind CSS 
-- **Database:** PostgreSQL (Lokal via Laragon, Produksi via Render)
+- **Database:** PostgreSQL (Lokal via Laragon, Produksi via Supabase)
 - **Penyimpanan Gambar (Storage):** Cloudinary API
-- **Deployment Server:** Render
+- **Deployment Server:** Vercel
 - **Real-Time Socket:** Konfigurasi Pusher/Reverb 
 
 ## 🚀 Panduan Instalasi (Lokal via Laragon)
@@ -80,9 +80,10 @@ Silakan masuk menggunakan akun buatan dari struktur percobaan dan nikmati eksplo
 
 ## 🌍 Gambaran Deployment (Server Produksi)
 
-Aplikasi ini sudah dipersiapkan dan dioptimalkan agar dapat langsung di-deploy (mengudara) menggunakan konfigurasi hemat biaya nan modern:
-- **Server Aplikasi & Database Utama:** Menggunakan layanan [Render.com](https://render.com) (Untuk menghosting mesin web Laravel dan sekaligus server database PostgreSQL Produksi).
-- **Media File Lampiran Gambar:** Menggunakan integrasi [Cloudinary](https://cloudinary.com) agar gambar-gambar bukti pelaporan yang diunggah dari server lokal maupun melalui aplikasi web yang sudah *live* tidak membebani server/mudah hilang.
+Aplikasi ini sudah dipersiapkan dan dioptimalkan agar dapat langsung di-deploy (mengudara) menggunakan konfigurasi arsitektur serverless yang hemat biaya nan modern:
+- **Server Aplikasi Frontend & Backend:** Menggunakan layanan [Vercel](https://vercel.com) (Serverless PHP via `vercel-php`).
+- **Server Database:** Menggunakan layanan [Supabase](https://supabase.com) (PostgreSQL Database dengan Transaction Pooler).
+- **Media File Lampiran Gambar:** Menggunakan integrasi [Cloudinary](https://cloudinary.com) agar gambar-gambar bukti pelaporan yang diunggah aman dan tidak membebani server.
 
 ---
 *Didesain dan dikembangkan sebagai lompatan digitalisasi infrastruktur modern untuk kenyamanan sivitas SMAN 11 Semarang.*
