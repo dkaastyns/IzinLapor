@@ -1,6 +1,7 @@
 {
     "version": 2,
     "framework": null,
+    "regions": ["sin1"],
     "installCommand": "npm install",
     "buildCommand": "bash vercel-build.sh",
     "outputDirectory": "public",
