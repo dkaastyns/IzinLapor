@@ -1,21 +1,22 @@
 #!/bin/bash
 # Script build Vercel — dipanggil otomatis saat deploy
-# Script ini: install deps → build Vite assets → optimize Laravel
+set -e
 
-set -e  # Stop jika ada error
+echo "=== [1/5] Download Composer ==="
+# Vercel build env tidak punya composer — download langsung dari getcomposer.org
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --quiet
+rm composer-setup.php
+echo "Composer berhasil didownload."
 
-echo "=== [1/4] Install composer dependencies ==="
-composer install --no-dev --optimize-autoloader --no-interaction
+echo "=== [2/5] Install composer dependencies ==="
+php composer.phar install --no-dev --optimize-autoloader --no-interaction --no-progress
 
-echo "=== [2/4] Install npm dependencies ==="
-npm ci
+echo "=== [3/5] Install npm dependencies ==="
+npm ci --prefer-offline
 
-echo "=== [3/4] Build frontend assets (Vite) ==="
+echo "=== [4/5] Build frontend assets (Vite) ==="
 npm run build
 
-echo "=== [4/4] Cache config dan routes Laravel ==="
-# Catatan: php artisan config:cache tidak bisa dijalankan di sini karena env vars
-# belum tersedia saat build. Vercel akan set env vars di runtime, bukan build time.
-# File .env tidak ada — Laravel akan baca env vars dari system langsung.
-
-echo "=== Build selesai! ==="
+echo "=== [5/5] Selesai! ==="
+echo "Build sukses — siap deploy ke Vercel."
