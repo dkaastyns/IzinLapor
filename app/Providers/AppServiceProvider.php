@@ -22,12 +22,15 @@ class AppServiceProvider extends ServiceProvider
     // Menjalankan tugas awal konfigurasi layanan aplikasi (booting)
     public function boot(): void
     {
-        // Paksa HTTPS di production (Render menggunakan reverse proxy)
+        // Paksa HTTPS di production (Vercel menggunakan reverse proxy — trustProxies sudah di-set di bootstrap/app.php)
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
 
-        Vite::prefetch(concurrency: 3);
+        // Nonaktifkan Vite::prefetch di serverless (tidak ada persistensi koneksi)
+        if (!$this->app->environment('production')) {
+            Vite::prefetch(concurrency: 3);
+        }
 
         Gate::define('admin-only', function ($user) {
             return $user->is_admin;
