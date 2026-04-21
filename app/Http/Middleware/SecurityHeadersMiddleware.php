@@ -26,7 +26,7 @@ class SecurityHeadersMiddleware
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https://res.cloudinary.com",
-            "connect-src 'self' https://*.pusherplatform.io https://*.pusher.com",
+            "connect-src 'self' https://*.pusherplatform.io https://*.pusher.com wss://*.pusher.com",
             "frame-src 'none'",
             "object-src 'none'",
             "base-uri 'self'",
