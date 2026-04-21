@@ -186,7 +186,7 @@ class ComplaintController extends Controller
             return back()->withErrors(['images' => $debugMsg])->withInput();
         }
 
-        Complaint::create([
+        $complaint = Complaint::create([
             'user_id' => auth()->id(),
             'category_id' => $request->category_id,
             // Keamanan: Membersihkan tag HTML (mencegah XSS)
@@ -228,6 +228,14 @@ class ComplaintController extends Controller
         } catch (\Exception $e) {
             \Log::error('Pusher Beams Error (Store): ' . $e->getMessage());
         }
+
+        // Memancarkan notifikasi websocket ke UI Admin (Real-time tanpa refresh)
+        try {
+            event(new \App\Events\ComplaintCreated($complaint));
+        } catch (\Exception $e) {
+            \Log::error('Pusher Channels Error: ' . $e->getMessage());
+        }
+
 
         return redirect()->route('complaints.index')->with('message', 'Laporan berhasil terkirim!');
     }
@@ -523,6 +531,14 @@ class ComplaintController extends Controller
         } catch (\Exception $e) {
             \Log::error('Pusher Beams Error (Update Status): ' . $e->getMessage());
         }
+
+        // Memancarkan notifikasi websocket ke halaman User (Real-time tanpa refresh)
+        try {
+            event(new \App\Events\ComplaintStatusUpdated($complaint));
+        } catch (\Exception $e) {
+            \Log::error('Pusher Channels Error: ' . $e->getMessage());
+        }
+
 
         return redirect()->back()->with('message', 'Status laporan berhasil diperbarui!');
     }

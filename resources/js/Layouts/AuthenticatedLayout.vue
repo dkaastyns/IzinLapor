@@ -216,17 +216,28 @@ onMounted(() => {
     window.addEventListener('admin-notification-read', handleAdminNotificationRead);
 
     if (!isAdmin.value) {
-        // User: poll setiap 60 detik (hemat resource Railway)
         fetchUnreadCount();
-        pollInterval = setInterval(fetchUnreadCount, 60000);
+        
+        // Listen ke Websocket untuk update Real-time
+        if (window.Echo) {
+            window.Echo.channel(`user.${user.value.id}`)
+                .listen('.complaint.status.updated', (e) => {
+                    fetchUnreadCount();
+                });
+        }
     } else {
-        // Admin: poll setiap 45 detik (hemat resource, masih responsif)
-        // Sentinel -1 agar poll pertama tidak trigger toast untuk notif lama
         prevAdminCount = -1;
         fetchAdminUnreadCount().then(() => {
             prevAdminCount = adminUnreadCount.value;
         });
-        adminPollInterval = setInterval(fetchAdminUnreadCount, 45000);
+        
+        // Listen ke Websocket untuk update Real-time
+        if (window.Echo) {
+            window.Echo.channel('admin-notifications')
+                .listen('.complaint.new', (e) => {
+                    fetchAdminUnreadCount();
+                });
+        }
     }
 
     // Initialize Pusher Beams (dynamic import — safe on HTTP)

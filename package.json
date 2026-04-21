@@ -26,6 +26,8 @@
     "dependencies": {
         "@pusher/push-notifications-web": "^1.1.0",
         "@vueuse/core": "^14.2.1",
+        "laravel-echo": "^2.3.4",
+        "pusher-js": "^8.5.0",
         "vue-i18n": "^11.3.0"
     }
 }
