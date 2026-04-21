@@ -15,7 +15,7 @@ Aplikasi pelaporan dan manajemen keluhan fasilitas sekolah yang dibangun khusus 
 
 Aplikasi ini menggunakan perpaduan (*stack*) teknologi yang modern dan responsif dengan struktur *Single Page Application* (SPA):
 
-- **Tim Backend:** Framework Laravel 11.x (PHP 8)
+- **Tim Backend:** Framework Laravel 12.xx (PHP 8)
 - **Tim Frontend:** Vue.js 3 (*Composition API*) dengan jembatan Inertia.js untuk perpindahan halaman tanpa *loading*.
 - **Styling Visual:** Tailwind CSS 
 - **Database:** PostgreSQL (Lokal via Laragon, Produksi via Supabase)
