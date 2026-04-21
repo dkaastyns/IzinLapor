@@ -11,7 +11,7 @@ Proyek ini dibangun oleh **Kelompok 38 RPL (Rekayasa Perangkat Lunak)**.
 Aplikasi ini diimplementasikan menggunakan arsitektur **Single Page Application (SPA)** yang modern dengan tumpukan teknologi (tech stack) sebagai berikut:
 
 ### Backend
-- **Framework:** Laravel 11.x (PHP 8)
+- **Framework:** Laravel 12.x (PHP 8)
 - **Database:** PostgreSQL (Supabase)
 - **Real-Time WebSockets:** Laravel Reverb / Pusher
 
