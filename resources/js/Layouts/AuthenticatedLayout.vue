@@ -259,7 +259,7 @@ onMounted(() => {
             } catch (e) {
                 console.warn('Pusher Beams init error:', e);
             }
-        }).catch(err => console.warn('Pusher Beams SDK load skipped:', err));
+        }).catch(() => console.info('Pusher Beams: skipped (CSP restriction)'));
     } else {
         console.info('Pusher Beams: skipped (requires HTTPS)');
     }
