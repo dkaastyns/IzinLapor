@@ -230,10 +230,12 @@ class ComplaintController extends Controller
         }
 
         // Memancarkan notifikasi websocket ke UI Admin (Real-time tanpa refresh)
-        try {
-            event(new \App\Events\ComplaintCreated($complaint));
-        } catch (\Exception $e) {
-            \Log::error('Pusher Channels Error: ' . $e->getMessage());
+        if (config('broadcasting.default') === 'pusher' && config('broadcasting.connections.pusher.key')) {
+            try {
+                event(new \App\Events\ComplaintCreated($complaint));
+            } catch (\Exception $e) {
+                \Log::error('Pusher Channels Error: ' . $e->getMessage());
+            }
         }
 
 
@@ -533,10 +535,12 @@ class ComplaintController extends Controller
         }
 
         // Memancarkan notifikasi websocket ke halaman User (Real-time tanpa refresh)
-        try {
-            event(new \App\Events\ComplaintStatusUpdated($complaint));
-        } catch (\Exception $e) {
-            \Log::error('Pusher Channels Error: ' . $e->getMessage());
+        if (config('broadcasting.default') === 'pusher' && config('broadcasting.connections.pusher.key')) {
+            try {
+                event(new \App\Events\ComplaintStatusUpdated($complaint));
+            } catch (\Exception $e) {
+                \Log::error('Pusher Channels Error: ' . $e->getMessage());
+            }
         }
 
 
