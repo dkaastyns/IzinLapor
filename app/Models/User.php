@@ -15,7 +15,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'is_admin', //WAJIB ditambahkan di sini
+        'is_admin',       // WAJIB ditambahkan di sini
+        'last_login_at',  // Waktu login terakhir
     ];
 
     protected $hidden = [
@@ -27,8 +28,9 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'is_admin' => 'boolean', //biar true/false konsisten
+            'password'          => 'hashed',
+            'is_admin'          => 'boolean',  // biar true/false konsisten
+            'last_login_at'     => 'datetime', // cast otomatis ke Carbon
         ];
     }
 }

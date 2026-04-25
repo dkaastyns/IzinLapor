@@ -3,7 +3,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 defineProps({
     mustVerifyEmail: {
@@ -12,6 +13,50 @@ defineProps({
     status: {
         type: String,
     },
+});
+
+const page = usePage();
+
+// Format waktu login terakhir secara dinamis
+const lastLoginFormatted = computed(() => {
+    const raw = page.props.auth?.user?.last_login_at;
+    if (!raw) return 'Belum tercatat';
+
+    const loginDate = new Date(raw);
+    const now = new Date();
+
+    const isToday =
+        loginDate.getDate() === now.getDate() &&
+        loginDate.getMonth() === now.getMonth() &&
+        loginDate.getFullYear() === now.getFullYear();
+
+    const isYesterday = (() => {
+        const y = new Date(now);
+        y.setDate(y.getDate() - 1);
+        return (
+            loginDate.getDate() === y.getDate() &&
+            loginDate.getMonth() === y.getMonth() &&
+            loginDate.getFullYear() === y.getFullYear()
+        );
+    })();
+
+    const timeStr = loginDate.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Jakarta',
+    });
+
+    if (isToday) return `Hari ini, ${timeStr}`;
+    if (isYesterday) return `Kemarin, ${timeStr}`;
+
+    return loginDate.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Jakarta',
+    });
 });
 </script>
 
@@ -72,7 +117,7 @@ defineProps({
                                 </div>
                                 <div class="flex flex-col">
                                     <span class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-0.5">Login Terakhir</span>
-                                    <span class="text-base font-black text-gray-800 leading-tight">Hari ini, 09:42</span>
+                                    <span class="text-base font-black text-gray-800 leading-tight">{{ lastLoginFormatted }}</span>
                                 </div>
                             </div>
                         </div>

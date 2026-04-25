@@ -29,6 +29,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Catat waktu login terakhir
+        $request->user()->update(['last_login_at' => now()]);
+
         // Arahkan berdasarkan peran (role)
         if ($request->user()->is_admin) {
             return redirect()->intended(route('admin.dashboard', absolute: false));
