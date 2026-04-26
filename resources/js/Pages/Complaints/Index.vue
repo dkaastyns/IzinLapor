@@ -366,9 +366,7 @@ const statusColorMap = {
 
         <div class="riwayat-page max-w-6xl mx-auto space-y-8">
 
-            <!-- ═══════════════════════════════════════════════════
-                 HERO SECTION
-                 ═══════════════════════════════════════════════════ -->
+            <!-- HERO SECTION -->
             <!-- Hero Banner -->
             <div class="relative overflow-hidden rounded-[2rem] bg-[#533483] animate-fade-in-up border border-white/10 shadow-2xl group mb-8">
                 <!-- Abstract Background Orbs -->
@@ -501,9 +499,7 @@ const statusColorMap = {
                 </div>
             </div>
 
-            <!-- ═══════════════════════════════════════════════════
-                 FILTER TABS
-                 ═══════════════════════════════════════════════════ -->
+            <!-- FILTER TABS -->
             <div class="animate-fade-in-up stagger-1">
                 <div class="riwayat-filter-bar shadow-sm">
                     <button
@@ -532,9 +528,7 @@ const statusColorMap = {
             </div>
 
 
-            <!-- ═══════════════════════════════════════════════════
-                 SORTING BAR
-                 ═══════════════════════════════════════════════════ -->
+            <!-- SORTING BAR -->
             <div class="flex items-center justify-between animate-fade-in-up stagger-1 mb-2">
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] font-extrabold text-gray-400 uppercase tracking-[0.15em]">Urutkan</span>
@@ -557,9 +551,7 @@ const statusColorMap = {
                 </p>
             </div>
 
-            <!-- ═══════════════════════════════════════════════════
-                 COMPLAINT CARDS GRID
-                 ═══════════════════════════════════════════════════ -->
+            <!-- COMPLAINT CARDS GRID -->
 
             <!-- Loading Skeleton -->
             <div v-if="isInitialLoad" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 animate-fade-in-up stagger-2">
@@ -715,9 +707,7 @@ const statusColorMap = {
                 </button>
             </div>
 
-            <!-- ═══════════════════════════════════════════════════
-                 PAGINATION + COUNT
-                 ═══════════════════════════════════════════════════ -->
+            <!-- PAGINATION + COUNT -->
                 <div v-if="!isInitialLoad && localComplaints.length > 0" class="text-center mt-4">
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">
                         Menampilkan {{ localComplaints.length }} dari {{ complaints.total }} Laporan
@@ -741,9 +731,7 @@ const statusColorMap = {
                 </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════
-             DETAIL MODAL (Fullscreen Overlay)
-             ═══════════════════════════════════════════════════════════ -->
+        <!-- DETAIL MODAL (Fullscreen Overlay) -->
         <Teleport to="body">
             <Transition name="detail-modal">
                 <div
@@ -1058,9 +1046,7 @@ const statusColorMap = {
 </template>
 
 <style scoped>
-/* ══════════════════════════════════════════════════
-   FILTER BAR
-   ══════════════════════════════════════════════════ */
+/* FILTER BAR */
 .riwayat-filter-bar {
     display: flex;
     gap: 0.5rem;
@@ -1126,9 +1112,7 @@ const statusColorMap = {
 .count-emerald { background: rgba(16, 185, 129, 0.1); color: #059669; }
 .count-rose { background: rgba(244, 63, 94, 0.1); color: #e11d48; }
 
-/* ══════════════════════════════════════════════════
-   COMPLAINT CARDS
-   ══════════════════════════════════════════════════ */
+/* COMPLAINT CARDS */
 .riwayat-card {
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(24px);
@@ -1318,9 +1302,7 @@ const statusColorMap = {
 
 /* CTA Card removed – button is in hero section */
 
-/* ══════════════════════════════════════════════════
-   EMPTY STATE
-   ══════════════════════════════════════════════════ */
+/* EMPTY STATE */
 .riwayat-empty-state {
     text-align: center;
     padding: 4rem 2rem;
@@ -1384,9 +1366,7 @@ const statusColorMap = {
     box-shadow: 0 8px 24px -6px rgba(124, 58, 237, 0.12);
 }
 
-/* ══════════════════════════════════════════════════
-   PAGINATION
-   ══════════════════════════════════════════════════ */
+/* PAGINATION */
 .riwayat-page-btn {
     padding: 0.625rem 1rem;
     font-size: 0.75rem;
@@ -1428,9 +1408,7 @@ const statusColorMap = {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* ══════════════════════════════════════════════════
-   DETAIL CARD
-   ══════════════════════════════════════════════════ */
+/* DETAIL CARD */
 .detail-card {
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(32px);
@@ -1474,9 +1452,7 @@ const statusColorMap = {
         inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 
-/* ══════════════════════════════════════════════════
-   DETAIL MODAL TRANSITIONS
-   ══════════════════════════════════════════════════ */
+/* DETAIL MODAL TRANSITIONS */
 .detail-modal-enter-active {
     transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }

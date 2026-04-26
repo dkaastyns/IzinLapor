@@ -331,9 +331,7 @@ const submit = () => {
                 </div>
 
                 <form @submit.prevent="submit">
-                    <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- STEP 1: DETAIL (Title + Category + Description)    -->
-                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- Step 1: Detail (Title + Category + Description) -->
                     <Transition
                         enter-active-class="transition-all duration-400 ease-out"
                         enter-from-class="opacity-0 translate-x-4"
@@ -452,9 +450,7 @@ const submit = () => {
                         </div>
                     </Transition>
 
-                    <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- STEP 2: FOTO (Upload Evidence Photos)              -->
-                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- Step 2: Foto (Upload Evidence Photos) -->
                     <Transition
                         enter-active-class="transition-all duration-400 ease-out"
                         enter-from-class="opacity-0 translate-x-4"
@@ -572,9 +568,7 @@ const submit = () => {
                         </div>
                     </Transition>
 
-                    <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- STEP 3: LOKASI (Location Selection + Submit)        -->
-                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- Step 3: Lokasi (Location Selection + Submit) -->
                     <Transition
                         enter-active-class="transition-all duration-400 ease-out"
                         enter-from-class="opacity-0 translate-x-4"

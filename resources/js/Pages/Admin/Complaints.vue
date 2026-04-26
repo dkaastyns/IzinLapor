@@ -297,7 +297,7 @@ function getAvatarColor(name) {
 
         <div class="max-w-7xl mx-auto space-y-6">
 
-            <!-- ═══ Overdue Warning ═══ -->
+            <!-- Overdue Warning -->
             <Transition name="net-err">
                 <div v-if="overdueCount > 0" class="flex items-center gap-3 p-4 rounded-2xl border bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 text-amber-800 animate-fade-in-up shadow-sm">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-sm flex-shrink-0">
@@ -310,7 +310,7 @@ function getAvatarColor(name) {
                 </div>
             </Transition>
 
-            <!-- ═══ Offline Toast ═══ -->
+            <!-- Offline Toast -->
             <Transition name="net-err">
                 <div v-if="offlineToast" class="flex items-center gap-3 p-4 rounded-2xl border bg-red-50 border-red-200 text-red-700 animate-fade-in-up">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-400 to-rose-500 flex items-center justify-center shadow-sm flex-shrink-0">
@@ -329,7 +329,7 @@ function getAvatarColor(name) {
                 </div>
             </Transition>
 
-            <!-- ═══ Search & Category Filter ═══ -->
+            <!-- Search & Category Filter -->
             <div class="glass-card premium-panel p-5 animate-fade-in-up">
                 <div class="flex flex-col lg:flex-row gap-4">
                     <div class="flex-1 relative group">
@@ -379,7 +379,7 @@ function getAvatarColor(name) {
                 </div>
             </div>
 
-            <!-- ═══ Complaints Table ═══ -->
+            <!-- Complaints Table -->
             <div class="glass-card premium-panel overflow-hidden animate-fade-in-up min-h-[400px]" style="animation-delay: 0.05s;">
                 <!-- Skeleton Loading -->
                 <div v-if="isInitialLoad" class="p-6 transition-all duration-500">
@@ -567,7 +567,7 @@ function getAvatarColor(name) {
                 </div>
             </div>
 
-            <!-- ═══ Pagination ═══ -->
+            <!-- Pagination -->
             <div v-if="complaints.links?.length > 3" class="flex justify-between items-center px-2 pb-4">
                 <p class="text-xs text-gray-400 font-medium">
                     Menampilkan {{ complaints.from }}–{{ complaints.to }} dari {{ complaints.total }} laporan
@@ -587,7 +587,7 @@ function getAvatarColor(name) {
             </div>
         </div>
 
-        <!-- ═══════════════ DETAIL MODAL (Management Console) ═══════════════ -->
+        <!-- DETAIL MODAL (Management Console) -->
         <Teleport to="body">
             <Transition name="modal" appear>
                 <div v-if="showDetail" class="modal-overlay" @click.self="showDetail = false">
@@ -799,7 +799,7 @@ function getAvatarColor(name) {
             </Transition>
         </Teleport>
 
-        <!-- ═══════════════ UPDATE STATUS MODAL (Reference Design) ═══════════════ -->
+        <!-- UPDATE STATUS MODAL (Reference Design) -->
         <Teleport to="body">
             <Transition name="modal" appear>
                 <div v-if="showModal" class="modal-overlay" @click.self="showModal = false" style="background: rgba(15, 23, 42, 0.2);">
@@ -926,7 +926,7 @@ function getAvatarColor(name) {
             </Transition>
         </Teleport>
 
-        <!-- ═══════════════ DELETE MODAL ═══════════════ -->
+        <!-- DELETE MODAL -->
         <Teleport to="body">
             <Transition name="modal" appear>
                 <div v-if="confirmDelete" class="modal-overlay" @click.self="confirmDelete = false">
@@ -957,7 +957,7 @@ function getAvatarColor(name) {
             </Transition>
         </Teleport>
 
-        <!-- ═══════════════ LIGHTBOX ═══════════════ -->
+        <!-- LIGHTBOX -->
         <Teleport to="body">
             <Transition name="lightbox">
                 <div v-if="lightboxOpen" class="fixed inset-0 z-[200] flex items-center justify-center bg-gray-900/70 backdrop-blur-sm" @click.self="closeLightbox">
@@ -973,7 +973,7 @@ function getAvatarColor(name) {
 </template>
 
 <style scoped>
-/* ═══ Table cells ═══ */
+/* Table cells */
 .tbl-th {
     @apply py-3.5 px-4 text-[10px] font-extrabold text-gray-400 uppercase tracking-widest border-b border-gray-100;
 }
@@ -981,7 +981,7 @@ function getAvatarColor(name) {
     @apply py-3.5 px-4 text-sm;
 }
 
-/* ═══ Filter Pills ═══ */
+/* Filter Pills */
 .filter-pill {
     @apply px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-300;
 }
@@ -992,7 +992,7 @@ function getAvatarColor(name) {
     @apply bg-white/60 backdrop-blur-md text-gray-500 border-white/80 hover:bg-white/80 hover:text-primary-600 hover:-translate-y-0.5;
 }
 
-/* ═══ Sort Pills ═══ */
+/* Sort Pills */
 .sort-pill {
     @apply px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all duration-300 flex items-center gap-1.5;
 }
@@ -1004,12 +1004,12 @@ function getAvatarColor(name) {
     @apply bg-white/40 text-gray-500 border-white/50 hover:bg-white/60 hover:text-primary-600;
 }
 
-/* ═══ Action Buttons ═══ */
+/* Action Buttons */
 .action-btn {
     @apply p-2 rounded-lg transition-all duration-200;
 }
 
-/* ═══ Pagination ═══ */
+/* Pagination */
 .pagination-btn {
     @apply px-3 py-2 text-[11px] font-extrabold rounded-lg transition-all duration-300 border h-9 min-w-[2.25rem] flex items-center justify-center;
 }
@@ -1026,7 +1026,7 @@ function getAvatarColor(name) {
     @apply bg-white/30 text-gray-300 border-white/30 cursor-not-allowed;
 }
 
-/* ═══ Detail Modal ═══ */
+/* Detail Modal */
 .detail-modal {
     width: 90%;
     max-width: 56rem;
@@ -1044,7 +1044,7 @@ function getAvatarColor(name) {
         0 10px 30px rgba(124, 58, 237, 0.05);
 }
 
-/* ═══ Status Select Buttons ═══ */
+/* Status Select Buttons */
 .status-select-btn {
     @apply flex items-center gap-2 px-4 py-3 rounded-xl border-2 text-sm font-bold transition-all duration-300 cursor-pointer;
 }
@@ -1052,7 +1052,7 @@ function getAvatarColor(name) {
     @apply shadow-sm -translate-y-0.5;
 }
 
-/* ═══ Progress Slider ═══ */
+/* Progress Slider */
 .progress-slider {
     @apply w-full h-2.5 rounded-lg appearance-none cursor-pointer;
     background: linear-gradient(to right, #ddd6fe, #c4b5fd);
@@ -1076,7 +1076,7 @@ function getAvatarColor(name) {
     outline: none;
 }
 
-/* ═══ Lightbox ═══ */
+/* Lightbox */
 .lightbox-enter-active { transition: opacity 0.3s ease; }
 .lightbox-leave-active { transition: opacity 0.22s ease; }
 .lightbox-enter-from, .lightbox-leave-to { opacity: 0; }
@@ -1085,7 +1085,7 @@ function getAvatarColor(name) {
     to   { opacity: 1; transform: scale(1); }
 }
 
-/* ═══ New Badge ═══ */
+/* New Badge */
 .new-badge {
     display: inline-flex;
     align-items: center;
@@ -1105,7 +1105,7 @@ function getAvatarColor(name) {
     50% { box-shadow: 0 2px 12px -1px rgba(239, 68, 68, 0.6); }
 }
 
-/* ═══ Custom scrollbar for detail modal ═══ */
+/* Custom scrollbar for detail modal */
 .detail-modal::-webkit-scrollbar { width: 6px; }
 .detail-modal::-webkit-scrollbar-track { background: transparent; }
 .detail-modal::-webkit-scrollbar-thumb { background: rgba(196, 181, 253, 0.4); border-radius: 9999px; }

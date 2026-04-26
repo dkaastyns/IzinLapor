@@ -2,7 +2,7 @@
 
 Aplikasi pelaporan dan manajemen keluhan fasilitas sekolah yang dibangun khusus untuk memudahkan siswa-siswi SMAN 11 Semarang melaporkan kerusakan infrastruktur secara digital, efisien, dan transparan.
 
-## 📋 Fitur Utama
+## Fitur Utama
 
 - **Sistem Pelaporan Mandiri:** Siswa dapat memfoto kerusakan, memilih kategori ruang/fasilitas, dan mengirimkan detail kerusakan lengkap beserta lampiran gambar.
 - **Transparansi Progres Penanganan:** Pengguna dapat memantau status aktual laporan mereka (mulai dari *Menunggu*, *Diproses*, hingga *Selesai*), lengkap dengan indikator persentase interaktif dan perkiraan target hari selesai.
@@ -11,7 +11,7 @@ Aplikasi pelaporan dan manajemen keluhan fasilitas sekolah yang dibangun khusus 
 - **Notifikasi *Real-Time*:** Terintegrasi langsung untuk seketika memberi tahu pelapor saat ada respons atau jika status laporannya sedang dikerjakan.
 - **Desain UI Premium:** Dibangun menggunakan konsep desain antarmuka *Liquid Glass* yang rapi, modern, dengan animasi kartu statistik layaknya aplikasi profesional.
 
-## 💻 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 Aplikasi ini menggunakan perpaduan (*stack*) teknologi yang modern dan responsif dengan struktur *Single Page Application* (SPA):
 
@@ -23,7 +23,7 @@ Aplikasi ini menggunakan perpaduan (*stack*) teknologi yang modern dan responsif
 - **Deployment Server:** Vercel
 - **Real-Time Socket:** Konfigurasi Pusher/Reverb 
 
-## 🚀 Panduan Instalasi (Lokal via Laragon)
+## Panduan Instalasi (Lokal via Laragon)
 
 Ikuti langkah-langkah di bawah untuk mengatur, menginstal, dan langsung menguji aplikasi ini secara lokal menggunakan **Laragon**:
 
@@ -78,7 +78,7 @@ Aplikasi siap mengudara! Karena Anda menggunakan Laragon, aplikasi ini juga bias
 
 Silakan masuk menggunakan akun buatan dari struktur percobaan dan nikmati eksplorasi aplikasinya!
 
-## 🌍 Gambaran Deployment (Server Produksi)
+## Gambaran Deployment (Server Produksi)
 
 Aplikasi ini sudah dipersiapkan dan dioptimalkan agar dapat langsung di-deploy (mengudara) menggunakan konfigurasi arsitektur serverless yang hemat biaya nan modern:
 - **Server Aplikasi Frontend & Backend:** Menggunakan layanan [Vercel](https://vercel.com) (Serverless PHP via `vercel-php`).

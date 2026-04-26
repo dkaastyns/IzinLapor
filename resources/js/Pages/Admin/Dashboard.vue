@@ -320,7 +320,7 @@ const formatDateFull = (dateStr) => {
 
         <div class="max-w-7xl mx-auto space-y-7">
 
-            <!-- ═══════════════ STATS ROW ═══════════════ -->
+            <!-- STATS ROW -->
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
                 <!-- Total Reports -->
                 <div
@@ -445,7 +445,7 @@ const formatDateFull = (dateStr) => {
                 </div>
             </div>
 
-            <!-- ═══════════════ RATING STRIP ═══════════════ -->
+            <!-- RATING STRIP -->
             <div class="ds-rating-strip">
                 <div class="absolute inset-0 bg-gradient-to-r from-amber-500 via-orange-400 to-emerald-400 rounded-2xl"></div>
                 <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/20 blur-xl"></div>
@@ -479,7 +479,7 @@ const formatDateFull = (dateStr) => {
                 </div>
             </div>
 
-            <!-- ═══════════════ FILTER PILLS ═══════════════ -->
+            <!-- FILTER PILLS -->
             <div class="flex flex-wrap items-center gap-2">
                 <button
                     @click="activeFilter = null"
@@ -518,7 +518,7 @@ const formatDateFull = (dateStr) => {
                 </button>
             </div>
 
-            <!-- ═══════════════ INSIGHTS ROW (3 columns) ═══════════════ -->
+            <!-- INSIGHTS ROW (3 columns) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <!-- ─── Category Distribution ─────────────────────── -->
                 <div class="ds-panel p-6 flex flex-col">
@@ -669,7 +669,7 @@ const formatDateFull = (dateStr) => {
                 </div>
             </div>
 
-            <!-- ═══════════════ COMPLAINTS TABLE (full width) ═══════════════ -->
+            <!-- COMPLAINTS TABLE (full width) -->
             <div id="complaints-table" class="ds-panel overflow-hidden scroll-mt-6">
                 <!-- Table Header -->
                 <div class="flex items-center justify-between px-7 py-5 border-b border-gray-100/80">
@@ -888,7 +888,7 @@ const formatDateFull = (dateStr) => {
             </div>
         </div>
 
-        <!-- ═══════════════ DETAIL MODAL ═══════════════ -->
+        <!-- DETAIL MODAL -->
         <Teleport to="body">
             <Transition name="modal" appear>
                 <div v-if="showDetail" class="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/20 backdrop-blur-sm" @click.self="showDetail = false">
@@ -991,7 +991,7 @@ const formatDateFull = (dateStr) => {
 </template>
 
 <style scoped>
-/* ═══════════════ STAT CARDS ═══════════════ */
+/* STAT CARDS */
 .ds-stat-card {
     @apply relative overflow-hidden rounded-[1.5rem] p-6 bg-white border border-gray-200/80 flex flex-col;
     min-height: 180px;
@@ -1028,12 +1028,12 @@ const formatDateFull = (dateStr) => {
     @apply px-2.5 py-1 rounded-full text-[9px] font-extrabold tracking-[0.1em] uppercase border shadow-sm;
 }
 
-/* ═══════════════ RATING STRIP ═══════════════ */
+/* RATING STRIP */
 .ds-rating-strip {
     @apply relative overflow-hidden rounded-2xl px-6 py-5;
 }
 
-/* ═══════════════ FILTER PILLS ═══════════════ */
+/* FILTER PILLS */
 .ds-filter-pill {
     @apply px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider border select-none;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -1058,13 +1058,13 @@ const formatDateFull = (dateStr) => {
     box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.06);
 }
 
-/* ═══════════════ PANELS ═══════════════ */
+/* PANELS */
 .ds-panel {
     @apply bg-white rounded-[1.5rem] border border-gray-200/80;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 20px -6px rgba(0,0,0,0.08);
 }
 
-/* ═══════════════ UNIFIED BAR COLORS ═══════════════ */
+/* UNIFIED BAR COLORS */
 .ds-bar {
     @apply rounded-full;
 }
@@ -1078,7 +1078,7 @@ const formatDateFull = (dateStr) => {
 .ds-bar-8 { background: linear-gradient(90deg, #a5b4fc, #818cf8); }
 .ds-bar-dark { background: linear-gradient(90deg, #4f46e5, #4338ca); }
 
-/* ═══════════════ WIDGET TITLE ═══════════════ */
+/* WIDGET TITLE */
 .ds-widget-title {
     @apply text-xs font-extrabold text-gray-900 uppercase tracking-widest flex items-center gap-2.5;
 }
@@ -1087,12 +1087,12 @@ const formatDateFull = (dateStr) => {
     @apply w-2.5 h-2.5 rounded-full flex-shrink-0;
 }
 
-/* ═══════════════ LINK ARROW ═══════════════ */
+/* LINK ARROW */
 .ds-link-arrow {
     @apply text-xs text-primary-500 font-bold hover:text-primary-600 transition uppercase tracking-wider flex items-center gap-1;
 }
 
-/* ═══════════════ SORT PILLS ═══════════════ */
+/* SORT PILLS */
 .ds-sort-pill {
     @apply px-3 py-1.5 rounded-lg text-[11px] font-semibold border flex items-center gap-1.5;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.15s ease, color 0.15s ease;
@@ -1107,7 +1107,7 @@ const formatDateFull = (dateStr) => {
     @apply bg-transparent text-gray-400 border-transparent hover:bg-gray-50 hover:text-primary-600;
 }
 
-/* ═══════════════ TABLE ═══════════════ */
+/* TABLE */
 .ds-table thead th {
     @apply py-3.5 px-4 text-[10px] font-extrabold text-gray-400 uppercase tracking-widest border-b border-gray-100;
 }
@@ -1116,7 +1116,7 @@ const formatDateFull = (dateStr) => {
     /* inherits from template classes */
 }
 
-/* ═══════════════ PAGINATION ═══════════════ */
+/* PAGINATION */
 .ds-page-btn {
     @apply px-3 py-2 text-[11px] font-extrabold rounded-lg border h-9 min-w-[2.25rem] flex items-center justify-center;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.15s ease, color 0.15s ease;
@@ -1140,7 +1140,7 @@ const formatDateFull = (dateStr) => {
     @apply bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed;
 }
 
-/* ═══════════════ QUICK ITEM ═══════════════ */
+/* QUICK ITEM */
 .ds-quick-item {
     @apply flex items-center gap-3 p-3.5 rounded-xl bg-gray-50/60 border border-gray-100;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
@@ -1161,7 +1161,7 @@ const formatDateFull = (dateStr) => {
     transform: scale(1.06) rotate(-2deg);
 }
 
-/* ═══════════════ VIEW DETAIL BUTTON ═══════════════ */
+/* VIEW DETAIL BUTTON */
 .ds-view-detail-btn {
     @apply text-[10px] text-primary-500 font-bold uppercase tracking-wider flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-transparent;
     transition: transform 0.2s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
@@ -1172,7 +1172,7 @@ const formatDateFull = (dateStr) => {
     transform: translateY(-1px);
 }
 
-/* ═══════════════ FACILITY ITEM ═══════════════ */
+/* FACILITY ITEM */
 .ds-facility-item {
     animation: dsFadeUp 0.3s ease both;
     will-change: opacity, transform;
@@ -1189,7 +1189,7 @@ const formatDateFull = (dateStr) => {
     }
 }
 
-/* ═══════════════ WIDGET ITEM TRANSITIONS ═══════════════ */
+/* WIDGET ITEM TRANSITIONS */
 .widget-item-enter-active {
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
@@ -1208,7 +1208,7 @@ const formatDateFull = (dateStr) => {
     transform: translateY(6px);
 }
 
-/* ═══════════════ TABLE ROW TRANSITIONS ═══════════════ */
+/* TABLE ROW TRANSITIONS */
 .table-row-enter-active {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -1227,7 +1227,7 @@ const formatDateFull = (dateStr) => {
     transform: translateX(8px);
 }
 
-/* ═══════════════ NEW BADGE ═══════════════ */
+/* NEW BADGE */
 .new-badge {
     display: inline-flex;
     align-items: center;

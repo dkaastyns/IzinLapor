@@ -379,9 +379,7 @@ const formatEstDate = (dateStr) => {
                 </div>
             </div>
 
-            <!-- ═══════════════════════════════════════════════════════
-                 RIWAYAT PENGADUAN SAYA
-                 ═══════════════════════════════════════════════════════ -->
+            <!-- RIWAYAT PENGADUAN SAYA -->
             <div class="animate-fade-in-up stagger-5">
                 <!-- Section Header Bar -->
                 <div class="riwayat-section-bar mb-6">
@@ -551,9 +549,7 @@ const formatEstDate = (dateStr) => {
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════
-             DETAIL MODAL (Fullscreen Overlay)
-             ═══════════════════════════════════════════════════════════ -->
+        <!-- DETAIL MODAL (Fullscreen Overlay) -->
         <Teleport to="body">
             <Transition name="detail-modal">
                 <div
