@@ -85,6 +85,11 @@ Aplikasi ini sudah dipersiapkan dan dioptimalkan agar dapat langsung di-deploy (
 - **Server Database:** Menggunakan layanan [Supabase](https://supabase.com) (PostgreSQL Database dengan Transaction Pooler).
 - **Media File Lampiran Gambar:** Menggunakan integrasi [Cloudinary](https://cloudinary.com) agar gambar-gambar bukti pelaporan yang diunggah aman dan tidak membebani server.
 
+## Tampilan Aplikasi
+
+### Halaman Login
+![Login](./screenshots/login.png)
+
 ---
 *Didesain dan dikembangkan sebagai lompatan digitalisasi infrastruktur modern untuk kenyamanan sivitas SMAN 11 Semarang.*
 

@@ -138,7 +138,9 @@ const submit = () => {
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                         </svg>
                         <span v-if="!form.processing" class="relative z-10 transition-transform duration-300 group-hover:-translate-x-1">Masuk Sekarang</span>
-                        <span v-else class="relative z-10">Memproses...</span>
+                        <span v-else class="relative z-10 flex items-center gap-2">
+                            Memproses...
+                        </span>
                         
                         <!-- Arrow Right Icon -->
                         <svg v-if="!form.processing" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
