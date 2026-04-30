@@ -1055,3 +1055,16 @@ html {
         animation: none !important;
     }
 }
+.btn-custom {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(to right, #4f46e5, #6366f1);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-custom:hover {
+  opacity: 0.85;
+}

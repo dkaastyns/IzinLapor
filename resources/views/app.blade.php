@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title inertia>{{ config('app.name', 'Pengaduan SMAN 11') }}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <meta name="description"
         content="Sistem Pengaduan Fasilitas SMAN 11 - Laporkan kerusakan fasilitas sekolah dengan mudah dan cepat.">
 
