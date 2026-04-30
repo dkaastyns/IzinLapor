@@ -430,7 +430,7 @@ const formatEstDate = (dateStr) => {
                         <div class="w-full sm:w-[45%] h-56 sm:h-auto bg-gray-100 relative overflow-hidden flex-shrink-0">
                             <!-- Image if exists -->
                             <template v-if="displayedComplaints[0].image_paths?.length > 0 || displayedComplaints[0].image_path">
-                                <img loading="lazy" :src="resolveImageUrl(displayedComplaints[0].image_paths?.[0] || displayedComplaints[0].image_path)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <img loading="lazy" alt="gambar laporan" :src="resolveImageUrl(displayedComplaints[0].image_paths?.[0] || displayedComplaints[0].image_path)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             </template>
                             <!-- Placeholder if no image -->
                             <div v-else class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-indigo-100 text-indigo-300">
@@ -608,13 +608,13 @@ const formatEstDate = (dateStr) => {
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <template v-if="selectedComplaint.image_paths?.length > 0">
                                                 <div v-for="(imgPath, idx) in selectedComplaint.image_paths" :key="idx" class="overflow-hidden rounded-xl bg-[#f3ebf5] aspect-video relative group cursor-zoom-in shadow-sm hover:shadow-md transition-shadow" @click.stop="openLightbox(selectedComplaint.image_paths.map(p => resolveImageUrl(p)), idx)">
-                                                    <img loading="lazy" :src="resolveImageUrl(imgPath)" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                                    <img loading="lazy" alt="gambar laporan" :src="resolveImageUrl(imgPath)" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                                     <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                                                 </div>
                                             </template>
                                             <template v-else-if="selectedComplaint.image_path">
                                                 <div class="overflow-hidden rounded-xl bg-[#f3ebf5] aspect-video relative group cursor-zoom-in shadow-sm hover:shadow-md transition-shadow" @click.stop="openLightbox([resolveImageUrl(selectedComplaint.image_path)], 0)">
-                                                    <img loading="lazy" :src="resolveImageUrl(selectedComplaint.image_path)" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                                    <img loading="lazy" alt="gambar laporan" :src="resolveImageUrl(selectedComplaint.image_path)" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                                     <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                                                 </div>
                                             </template>
@@ -765,7 +765,7 @@ const formatEstDate = (dateStr) => {
 
                     <button v-if="lightboxImages.length > 1" @click="navLightbox(-1)" class="absolute left-6 w-14 h-14 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 text-2xl transition-all duration-300 hover:scale-105">‹</button>
 
-                    <img loading="lazy"
+                    <img loading="lazy" alt="gambar laporan"
                         :src="lightboxImages[lightboxIndex]"
                         :alt="'Foto ' + (lightboxIndex + 1)"
                         class="max-w-[85vw] max-h-[80vh] object-contain rounded-2xl shadow-xl select-none bg-white border border-gray-100 p-2"
