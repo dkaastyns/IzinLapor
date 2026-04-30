@@ -97,7 +97,7 @@ const submit = () => {
                         <button
                             type="button"
                             @click="showPassword = !showPassword"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary-500 focus:outline-none transition-colors duration-200"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary-500 focus:outline-none transition-colors duration-200 group"
                         >
                             <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -127,11 +127,11 @@ const submit = () => {
                 </div>
 
                 <div class="pt-2">
-                
+
                 <!-- Tombol login dengan animasi dan loading -->
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 sm:py-4 rounded-full shadow-xl hover:scale-110 hover:shadow-[0_0_30px_rgba(139,92,246,0.9)] active:scale-90 transition-all duration-200 ease-in-out flex items-center justify-center gap-2"
+                        class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 sm:py-4 rounded-full shadow-xl hover:scale-110 hover:shadow-[0_0_30px_rgba(139,92,246,0.9)] active:scale-90 transition-all duration-300 ease-in-out flex items-center justify-center gap-2"
                         :class="{ 'opacity-70 cursor-not-allowed': form.processing }"
                         :disabled="form.processing"
                     >
@@ -141,13 +141,13 @@ const submit = () => {
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                         </svg>
-                        <span v-if="!form.processing" class="relative z-10 transition-transform duration-300 group-hover:-translate-x-1">Masuk Sekarang</span>
+                        <span v-if="!form.processing" class="relative z-10 transition-all duration-300 ease-in-out group-hover:-translate-x-1">Masuk Sekarang</span>
                         <span v-else class="relative z-10 flex items-center gap-2">
                             Memproses...
                         </span>
                         
                         <!-- Arrow Right Icon -->
-                        <svg v-if="!form.processing" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg v-if="!form.processing" class="w-5 h-5 relative z-10 transition-all duration-300 ease-in-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
                     </button>
