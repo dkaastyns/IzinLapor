@@ -1055,12 +1055,13 @@ html {
         animation: none !important;
     }
 }
+
+
 .btn-custom {
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(to right, #4f46e5, #6366f1);
-  color: white;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(to right, #4f46e5, #6366f1) !important;
+  color: white !important;
   cursor: pointer;
   transition: 0.3s;
 }

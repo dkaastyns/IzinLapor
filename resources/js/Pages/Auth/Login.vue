@@ -127,7 +127,7 @@ const submit = () => {
                 <div class="pt-2">
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-primary-600 to-indigo-500 hover:from-primary-500 hover:to-indigo-400 text-white font-black py-4 rounded-full shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 active:scale-[0.98] transition-all duration-500 flex items-center justify-center gap-2 group relative overflow-hidden"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:scale-105 text-white font-bold py-4 rounded-full shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                         :class="{ 'opacity-70 cursor-not-allowed': form.processing }"
                         :disabled="form.processing"
                     >
