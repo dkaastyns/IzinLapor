@@ -422,7 +422,7 @@ const formatEstDate = (dateStr) => {
                 <div v-else-if="allComplaints.length > 0" class="grid grid-cols-1 lg:grid-cols-5 gap-5 items-stretch">
                     <!-- Left: Featured Card (1st item) -->
                     <div v-if="displayedComplaints[0]" 
-                         class="lg:col-span-3 bg-white rounded-[1.25rem] overflow-hidden shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-gray-100 hover:shadow-lg transition-all cursor-pointer group flex flex-col sm:flex-row min-h-[260px] relative"
+                         class="lg:col-span-3 bg-white rounded-[1.25rem] overflow-hidden shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] border border-gray-100 hover:shadow-lg transition-all cursor-pointer group flex flex-col md:flex-row min-h-[260px] relative"
                          @click="openDetail(displayedComplaints[0])"
                     >
                         <div class="absolute top-0 left-0 right-0 h-[3px] z-20" :class="displayedComplaints[0].status === 'resolved' ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : (displayedComplaints[0].status === 'pending' ? 'bg-gradient-to-r from-orange-400 to-orange-500' : 'bg-gradient-to-r from-blue-400 to-blue-500')"></div>
@@ -466,7 +466,7 @@ const formatEstDate = (dateStr) => {
                                 </p>
                             </div>
                             
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-6 pt-5 border-t border-gray-100">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mt-6 pt-5 border-t border-gray-100">
                                 <div class="flex items-center gap-2.5">
                                     <div class="w-7 h-7 rounded-full bg-gray-100 border border-gray-200 overflow-hidden flex items-center justify-center flex-shrink-0">
                                         <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
