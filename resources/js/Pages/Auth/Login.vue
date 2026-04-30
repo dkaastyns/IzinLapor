@@ -28,13 +28,13 @@ const submit = () => {
     <GuestLayout>
         <Head title="Login" />
 
-        <div class="w-full">
+        <div class="w-full px-4 sm:px-0">
             <div class="mb-10 text-center sm:text-left">
                 <div class="flex items-center gap-3 mb-4 motion-preset-slide-right motion-duration-500 justify-center sm:justify-start">
                     <div class="login-icon-badge">
                         <span class="text-xl">🔑</span>
                     </div>
-                    <h2 class="text-[28px] sm:text-3xl font-black text-gray-900 tracking-tighter leading-tight">
+                    <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tighter leading-tight">
                         Selamat Datang Kembali
                     </h2>
                 </div>
@@ -60,7 +60,7 @@ const submit = () => {
                         <input
                             id="email"
                             type="email"
-                            class="block w-full pl-14 pr-6 py-4 bg-white border border-gray-200/70 rounded-full text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-primary-500/50 focus:ring-4 focus:ring-primary-500/10 transition-all duration-300 shadow-sm"
+                            class="block w-full pl-14 pr-6 py-3 sm:py-4 bg-white border border-gray-200/70 rounded-full text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-primary-500/50 focus:ring-4 focus:ring-primary-500/10 transition-all duration-300 shadow-sm"
                             v-model="form.email"
                             required
                             autofocus
@@ -85,7 +85,7 @@ const submit = () => {
                         <input
                             id="password"
                             :type="showPassword ? 'text' : 'password'"
-                            class="block w-full pl-14 pr-14 py-4 bg-white border border-gray-200/70 rounded-full text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-primary-500/50 focus:ring-4 focus:ring-primary-500/10 transition-all duration-300 shadow-sm"
+                            class="block w-full pl-14 pr-14 py-3 sm:py-4 bg-white border border-gray-200/70 rounded-full text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-primary-500/50 focus:ring-4 focus:ring-primary-500/10 transition-all duration-300 shadow-sm"
                             :class="!showPassword && form.password ? 'tracking-[0.25em]' : 'tracking-normal'"
                             v-model="form.password"
                             required
