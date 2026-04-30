@@ -131,7 +131,7 @@ const submit = () => {
                 <!-- Tombol login dengan animasi dan loading -->
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 sm:py-4 rounded-full shadow-xl hover:scale-110 hover:shadow-[0_0_30px_rgba(139,92,246,0.9)] active:scale-90 transition-all duration-300 ease-in-out flex items-center justify-center gap-2"
+                        class="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 m-p text-white font-bold py-3 sm:py-4 rounded-full shadow-xl hover:scale-110 hover:shadow-[0_0_30px_rgba(139,92,246,0.9)] active:scale-90 transition-all duration-300 ease-in-out flex items-center justify-center gap-2"
                         :class="{ 'opacity-70 cursor-not-allowed': form.processing }"
                         :disabled="form.processing"
                     >
