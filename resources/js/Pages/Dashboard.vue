@@ -458,10 +458,10 @@ const formatEstDate = (dateStr) => {
                                     </span>
                                     <span v-if="!displayedComplaints[0].notified_at && displayedComplaints[0].status !== 'pending'" class="sm:hidden px-2.5 py-1 bg-indigo-600 text-white rounded text-[9.5px] font-bold uppercase tracking-widest shadow-sm">Update</span>
                                 </div>
-                                <h3 class="font-extrabold text-gray-900 text-lg mb-2.5 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
+                                <h3 class="font-extrabold text-gray-900 text-base sm:text-lg mb-2.5 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
                                     {{ displayedComplaints[0].title }}
                                 </h3>
-                                <p class="text-[13px] text-gray-500 font-medium leading-relaxed line-clamp-3 md:line-clamp-4">
+                                <p class="text-xs sm:text-[13px] text-gray-500 font-medium leading-relaxed line-clamp-3 md:line-clamp-4">
                                     {{ displayedComplaints[0].description }}
                                 </p>
                             </div>
