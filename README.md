@@ -89,6 +89,8 @@ Aplikasi ini sudah dipersiapkan dan dioptimalkan agar dapat langsung di-deploy (
 
 ### Halaman Login
 ![Login](./screenshots/login.png)
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
 
 ---
 *Didesain dan dikembangkan sebagai lompatan digitalisasi infrastruktur modern untuk kenyamanan sivitas SMAN 11 Semarang.*
