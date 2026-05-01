@@ -45,6 +45,13 @@ const description = ref('');
 const location = ref('');
 const location_detail = ref('');
 
+console.log('INIT:', {
+  title: title.value,
+  category: category_id.value,
+  sub: sub_category_id.value,
+  desc: description.value
+});
+
 const { t } = useI18n();
 
 // Step Wizard
@@ -57,12 +64,13 @@ const steps = [
     { num: 3, label: 'LOKASI', icon: 'lokasi' },
 ];
 
-const stepDetailComplete = computed(() =>
-    title.value.trim() !== '' &&
-    finalCategoryId.value &&
-    description.value.trim().length >= 20 &&
-    (!hasSubCategories.value || sub_category_id.value)
-);
+const stepDetailComplete = computed(() => {
+    return (
+        title.value.trim().length >= 5 &&
+        category_id.value !== '' &&
+        description.value.trim().length >= 20
+    );
+});
 
 const stepFotoComplete = computed(() =>
     imagePreviews.value.length >= 1
@@ -80,16 +88,75 @@ const isStepComplete = (num) => {
 };
 
 const goToStep = (num) => {
-    currentStep.value = num;
+    // boleh mundur
+    if (num < currentStep.value) {
+        currentStep.value = num;
+        return;
+    }
+
+    // ke step 2 harus selesai step 1
+    if (num === 2 && stepDetailComplete.value) {
+        currentStep.value = num;
+        return;
+    }
+
+    // ke step 3 harus selesai step 2
+    if (num === 3 && stepFotoComplete.value) {
+        currentStep.value = num;
+        return;
+    }
+};
+
+const handleStepClick = (num) => {
+    if (num < currentStep.value) {
+        currentStep.value = num;
+        return;
+    }
+
+    if (num === 2 && stepDetailComplete.value) {
+        currentStep.value = 2;
+        return;
+    }
+
+    if (num === 3 && stepFotoComplete.value) {
+        currentStep.value = 3;
+        return;
+    }
 };
 
 const nextStep = () => {
-    if (currentStep.value < totalSteps) currentStep.value++;
+    // Step 1 → harus lengkap dulu
+    if (currentStep.value === 1) {
+        console.log('CHECK STEP 1:', stepDetailComplete.value);
+        if (!stepDetailComplete.value) return;
+    }
+
+    // Step 2 → harus ada foto
+    if (currentStep.value === 2) {
+        console.log('CHECK STEP 2:', stepFotoComplete.value);
+        if (!stepFotoComplete.value) return;
+    }
+
+    if (currentStep.value < totalSteps) {
+        currentStep.value++;
+    }
 };
 
 const prevStep = () => {
     if (currentStep.value > 1) currentStep.value--;
 };
+
+watch(currentStep, (val) => {
+    // kalau pindah ke step 2 tapi detail belum lengkap → BALIK
+    if (val === 2 && !stepDetailComplete.value) {
+        currentStep.value = 1;
+    }
+
+    // kalau pindah ke step 3 tapi foto belum ada → BALIK
+    if (val === 3 && !stepFotoComplete.value) {
+        currentStep.value = 2;
+    }
+});
 
 // Cascading sub-categories
 const selectedParent = computed(() =>
@@ -277,7 +344,7 @@ const submit = () => {
                     <template v-for="(step, idx) in steps" :key="step.num">
                         <!-- Step Circle -->
                         <button
-                            @click="goToStep(step.num)"
+                            @click="handleStepClick(step.num)"
                             class="flex flex-col items-center gap-2 group relative z-10 cursor-pointer"
                         >
                             <div
@@ -440,7 +507,8 @@ const submit = () => {
                             <div class="flex justify-end mt-8">
                                 <button
                                     type="button"
-                                    @click="nextStep"
+                                    @click="() => { if (!stepDetailComplete.value) return; nextStep(); }"
+                                    :disabled="!stepDetailComplete"
                                     class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-700 text-white font-bold text-sm rounded-2xl shadow-[0_8px_20px_-4px_rgba(124,58,237,0.4)] hover:shadow-[0_12px_28px_-4px_rgba(124,58,237,0.5)] hover:-translate-y-0.5 transition-all duration-300"
                                 >
                                     Lanjut ke Foto
@@ -558,7 +626,8 @@ const submit = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    @click="nextStep"
+                                    @click="() => { if (!stepFotoComplete.value) return; nextStep(); }""
+                                    :disabled="!stepFotoComplete"
                                     class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-700 text-white font-bold text-sm rounded-2xl shadow-[0_8px_20px_-4px_rgba(124,58,237,0.4)] hover:shadow-[0_12px_28px_-4px_rgba(124,58,237,0.5)] hover:-translate-y-0.5 transition-all duration-300"
                                 >
                                     Lanjut ke Lokasi
