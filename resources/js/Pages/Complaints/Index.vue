@@ -689,7 +689,7 @@ const statusColorMap = {
                     </div>
                 </div>
 
-            </div>
+            </TransitionGroup>
 
             <!-- Empty State -->
             <div v-else-if="!isInitialLoad" class="text-center py-20 px-6 relative group border border-transparent animate-fade-in-up mt-5">
