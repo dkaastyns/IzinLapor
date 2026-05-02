@@ -709,7 +709,19 @@ onUnmounted(() => {
             </Transition>
 
             <main class="p-6">
-                <slot />
+                <Transition
+                    enter-active-class="transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    enter-from-class="opacity-0 translate-y-4 blur-[2px]"
+                    enter-to-class="opacity-100 translate-y-0 blur-none"
+                    leave-active-class="transition-all duration-300 ease-in"
+                    leave-from-class="opacity-100 translate-y-0 blur-none"
+                    leave-to-class="opacity-0 -translate-y-4 blur-[2px]"
+                    mode="out-in"
+                >
+                    <div :key="$page.url">
+                        <slot />
+                    </div>
+                </Transition>
             </main>
         </div>
 

@@ -574,7 +574,18 @@ const statusColorMap = {
                 </div>
             </div>
 
-            <div v-else-if="filteredComplaints?.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <TransitionGroup 
+                v-else-if="filteredComplaints?.length > 0" 
+                tag="div" 
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                enter-active-class="transition-all duration-700 ease-out"
+                enter-from-class="opacity-0 translate-y-8 scale-95"
+                enter-to-class="opacity-100 translate-y-0 scale-100"
+                leave-active-class="transition-all duration-300 ease-in absolute w-full"
+                leave-from-class="opacity-100 translate-y-0 scale-100"
+                leave-to-class="opacity-0 translate-y-4 scale-95"
+                move-class="transition-all duration-500 ease-in-out"
+            >
                 <!-- Complaint Card -->
                 <div
                     v-for="(complaint, index) in filteredComplaints"
