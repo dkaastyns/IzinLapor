@@ -764,12 +764,8 @@ const submit = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    class="px-8 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-[0_10px_30px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_16px_40px_-6px_rgba(124,58,237,0.6)] hover:-translate-y-1 transition-all duration-500 flex justify-center items-center gap-2 relative overflow-hidden mx-auto sm:mx-0"
-                                    :class="{
-                                        'opacity-50 cursor-not-allowed hover:-translate-y-0 hover:shadow-none saturate-50': !canSubmit && !processing,
-                                        'w-16 sm:w-16 !px-0 rounded-full !shadow-[0_0_20px_rgba(124,58,237,0.8)] scale-95': processing,
-                                        'w-full sm:flex-1 sm:max-w-xs': !processing
-                                    }"
+                                    class="w-full sm:flex-1 sm:max-w-xs px-8 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-[0_10px_30px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_16px_40px_-6px_rgba(124,58,237,0.6)] hover:-translate-y-1 transition-all duration-300 flex justify-center items-center gap-2 relative overflow-hidden"
+                                    :class="{ 'opacity-50 cursor-not-allowed hover:-translate-y-0 hover:shadow-none saturate-50': processing || !canSubmit }"
                                     :disabled="processing || !canSubmit"
                                 >
                                     <!-- Shine effect -->
