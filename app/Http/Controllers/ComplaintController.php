@@ -37,6 +37,7 @@ class ComplaintController extends Controller
         $recentComplaints = Complaint::with(['category.parent'])
             ->where('user_id', $user->id)
             ->latest()
+            ->limit(5)
             ->get();
 
         return Inertia::render('Dashboard', [
@@ -161,7 +162,7 @@ class ComplaintController extends Controller
                             ['quality' => 'auto', 'fetch_format' => 'auto']
                         ],
                     ]);
-                    
+
                     // Cloudinary SDK v3 return array
                     if (isset($result['secure_url'])) {
                         $paths[] = $result['secure_url'];
@@ -201,6 +202,7 @@ class ComplaintController extends Controller
 
         // Performa: Menghapus cache saat ada data baru
         Cache::forget('admin_dashboard_stats');
+        Cache::forget('categories_dashboard');
 
         // Mengirimkan notifikasi push ke admin menggunakan Pusher Beams
         try {
