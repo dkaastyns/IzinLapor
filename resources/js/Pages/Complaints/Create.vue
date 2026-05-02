@@ -507,7 +507,7 @@ const submit = () => {
                             <div class="flex justify-end mt-8">
                                 <button
                                     type="button"
-                                    @click="() => { if (!stepDetailComplete.value) return; nextStep(); }"
+                                    @click="nextStep"
                                     :disabled="!stepDetailComplete"
                                     class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-700 text-white font-bold text-sm rounded-2xl shadow-[0_8px_20px_-4px_rgba(124,58,237,0.4)] hover:shadow-[0_12px_28px_-4px_rgba(124,58,237,0.5)] hover:-translate-y-0.5 transition-all duration-300"
                                 >
@@ -626,7 +626,7 @@ const submit = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    @click="() => { if (!stepFotoComplete.value) return; nextStep(); }""
+                                    @click="nextStep"
                                     :disabled="!stepFotoComplete"
                                     class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-700 text-white font-bold text-sm rounded-2xl shadow-[0_8px_20px_-4px_rgba(124,58,237,0.4)] hover:shadow-[0_12px_28px_-4px_rgba(124,58,237,0.5)] hover:-translate-y-0.5 transition-all duration-300"
                                 >
@@ -764,8 +764,12 @@ const submit = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    class="w-full sm:flex-1 sm:max-w-xs px-8 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-[0_10px_30px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_16px_40px_-6px_rgba(124,58,237,0.6)] hover:-translate-y-1 transition-all duration-300 flex justify-center items-center gap-2 relative overflow-hidden"
-                                    :class="{ 'opacity-50 cursor-not-allowed hover:-translate-y-0 hover:shadow-none saturate-50': processing || !canSubmit }"
+                                    class="px-8 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-[0_10px_30px_-6px_rgba(124,58,237,0.5)] hover:shadow-[0_16px_40px_-6px_rgba(124,58,237,0.6)] hover:-translate-y-1 transition-all duration-500 flex justify-center items-center gap-2 relative overflow-hidden mx-auto sm:mx-0"
+                                    :class="{
+                                        'opacity-50 cursor-not-allowed hover:-translate-y-0 hover:shadow-none saturate-50': !canSubmit && !processing,
+                                        'w-16 sm:w-16 !px-0 rounded-full !shadow-[0_0_20px_rgba(124,58,237,0.8)] scale-95': processing,
+                                        'w-full sm:flex-1 sm:max-w-xs': !processing
+                                    }"
                                     :disabled="processing || !canSubmit"
                                 >
                                     <!-- Shine effect -->
