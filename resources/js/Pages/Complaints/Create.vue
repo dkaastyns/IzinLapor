@@ -45,14 +45,12 @@ const description = ref('');
 const location = ref('');
 const location_detail = ref('');
 
-console.log('INIT:', {
-  title: title.value,
-  category: category_id.value,
-  sub: sub_category_id.value,
-  desc: description.value
-});
+// Form initialized
 
 const { t } = useI18n();
+
+// Step Wizard direction tracking
+const isGoingForward = ref(true);
 
 // Step Wizard
 const currentStep = ref(1);
@@ -127,23 +125,25 @@ const handleStepClick = (num) => {
 const nextStep = () => {
     // Step 1 → harus lengkap dulu
     if (currentStep.value === 1) {
-        console.log('CHECK STEP 1:', stepDetailComplete.value);
         if (!stepDetailComplete.value) return;
     }
 
     // Step 2 → harus ada foto
     if (currentStep.value === 2) {
-        console.log('CHECK STEP 2:', stepFotoComplete.value);
         if (!stepFotoComplete.value) return;
     }
 
     if (currentStep.value < totalSteps) {
+        isGoingForward.value = true;
         currentStep.value++;
     }
 };
 
 const prevStep = () => {
-    if (currentStep.value > 1) currentStep.value--;
+    if (currentStep.value > 1) {
+        isGoingForward.value = false;
+        currentStep.value--;
+    }
 };
 
 watch(currentStep, (val) => {
@@ -504,11 +504,11 @@ const submit = () => {
           <!-- Step 1: Detail (Title + Category + Description) -->
           <Transition
             enter-active-class="transition-all duration-400 ease-out"
-            enter-from-class="opacity-0 translate-x-4"
+            :enter-from-class="isGoingForward ? 'opacity-0 translate-x-8' : 'opacity-0 -translate-x-8'"
             enter-to-class="opacity-100 translate-x-0"
-            leave-active-class="transition-all duration-200 ease-in"
+            leave-active-class="transition-all duration-300 ease-in"
             leave-from-class="opacity-100 translate-x-0"
-            leave-to-class="opacity-0 -translate-x-4"
+            :leave-to-class="isGoingForward ? 'opacity-0 -translate-x-8' : 'opacity-0 translate-x-8'"
           >
             <div
               v-if="currentStep === 1"
@@ -728,11 +728,11 @@ const submit = () => {
           <!-- Step 2: Foto (Upload Evidence Photos) -->
           <Transition
             enter-active-class="transition-all duration-400 ease-out"
-            enter-from-class="opacity-0 translate-x-4"
+            :enter-from-class="isGoingForward ? 'opacity-0 translate-x-8' : 'opacity-0 -translate-x-8'"
             enter-to-class="opacity-100 translate-x-0"
-            leave-active-class="transition-all duration-200 ease-in"
+            leave-active-class="transition-all duration-300 ease-in"
             leave-from-class="opacity-100 translate-x-0"
-            leave-to-class="opacity-0 -translate-x-4"
+            :leave-to-class="isGoingForward ? 'opacity-0 -translate-x-8' : 'opacity-0 translate-x-8'"
           >
             <div
               v-if="currentStep === 2"
@@ -928,11 +928,11 @@ const submit = () => {
           <!-- Step 3: Lokasi (Location Selection + Submit) -->
           <Transition
             enter-active-class="transition-all duration-400 ease-out"
-            enter-from-class="opacity-0 translate-x-4"
+            :enter-from-class="isGoingForward ? 'opacity-0 translate-x-8' : 'opacity-0 -translate-x-8'"
             enter-to-class="opacity-100 translate-x-0"
-            leave-active-class="transition-all duration-200 ease-in"
+            leave-active-class="transition-all duration-300 ease-in"
             leave-from-class="opacity-100 translate-x-0"
-            leave-to-class="opacity-0 -translate-x-4"
+            :leave-to-class="isGoingForward ? 'opacity-0 -translate-x-8' : 'opacity-0 translate-x-8'"
           >
             <div
               v-if="currentStep === 3"

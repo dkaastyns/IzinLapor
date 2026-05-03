@@ -221,9 +221,12 @@ onMounted(() => {
         // Listen ke Websocket untuk update Real-time
         if (window.Echo) {
             window.Echo.channel(`user.${user.value.id}`)
-                .listen('.complaint.status.updated', (e) => {
+                .listen('.complaint.status.updated', () => {
                     fetchUnreadCount();
                 });
+        } else {
+            // Polling fallback setiap 30 detik jika WebSocket tidak tersedia
+            pollInterval = setInterval(fetchUnreadCount, 30000);
         }
     } else {
         prevAdminCount = -1;
@@ -234,9 +237,12 @@ onMounted(() => {
         // Listen ke Websocket untuk update Real-time
         if (window.Echo) {
             window.Echo.channel('admin-notifications')
-                .listen('.complaint.new', (e) => {
+                .listen('.complaint.new', () => {
                     fetchAdminUnreadCount();
                 });
+        } else {
+            // Polling fallback setiap 30 detik jika WebSocket tidak tersedia
+            adminPollInterval = setInterval(fetchAdminUnreadCount, 30000);
         }
     }
 
@@ -244,7 +250,11 @@ onMounted(() => {
     if ('serviceWorker' in navigator && window.isSecureContext) {
         import('@pusher/push-notifications-web').then(({ Client }) => {
             try {
-                const instanceId = import.meta.env.VITE_PUSHER_BEAMS_INSTANCE_ID || '8c16ff90-1b3d-4d0f-834e-d5fb5401078f';
+                const instanceId = import.meta.env.VITE_PUSHER_BEAMS_INSTANCE_ID;
+                if (!instanceId) {
+                    console.info('Pusher Beams: skipped (VITE_PUSHER_BEAMS_INSTANCE_ID not set)');
+                    return;
+                }
                 const beamsClient = new Client({ instanceId });
 
                 beamsClient.start()
@@ -253,7 +263,7 @@ onMounted(() => {
                     return beamsClient.addDeviceInterest(interest);
                   })
                   .then(() => {
-                    console.log('Pusher Beams: subscribed to ' + (isAdmin.value ? 'admin-notifications' : `user-${user.value.id}`));
+                    console.info('Pusher Beams: subscribed to ' + (isAdmin.value ? 'admin-notifications' : `user-${user.value.id}`));
                   })
                   .catch(err => console.warn('Pusher Beams subscription error:', err));
             } catch (e) {
@@ -649,9 +659,12 @@ onUnmounted(() => {
         <!-- Mobile Menu Button -->
         <button
           class="md:hidden p-2 rounded-lg hover:bg-white/60 text-primary-700 transition"
+          :aria-label="showMobileSidebar ? 'Tutup menu' : 'Buka menu'"
           @click="toggleSidebar"
         >
+          <!-- Hamburger Icon (sidebar tertutup) -->
           <svg
+            v-if="!showMobileSidebar"
             class="w-6 h-6"
             fill="none"
             stroke="currentColor"
@@ -662,6 +675,21 @@ onUnmounted(() => {
               stroke-linejoin="round"
               stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <!-- X Icon (sidebar terbuka) -->
+          <svg
+            v-else
+            class="w-6 h-6 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>

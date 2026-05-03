@@ -33,6 +33,7 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#4B5563',
+        color: '#8b5cf6',  // primary-500 — sesuai brand
+        delay: 100,        // Hindari flash pada navigasi halaman cepat
     },
 });

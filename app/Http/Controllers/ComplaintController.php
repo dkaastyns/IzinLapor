@@ -179,10 +179,10 @@ class ComplaintController extends Controller
 
         // Jika semua foto gagal upload, tampilkan error diagnostik
         if (empty($paths)) {
-            $debugMsg = 'Foto gagal diunggah ke Cloudinary.';
-            if (!empty($uploadErrors) && config('app.debug') === false) {
-                // Tampilkan error singkat agar bisa didiagnosis (hapus setelah fixed)
-                $debugMsg .= ' Error: ' . substr(implode(' | ', $uploadErrors), 0, 200);
+            $debugMsg = 'Foto gagal diunggah. Silakan coba lagi atau hubungi administrator.';
+            if (!empty($uploadErrors) && config('app.debug') === true) {
+                // Hanya tampilkan detail error di environment development
+                $debugMsg .= ' Debug: ' . substr(implode(' | ', $uploadErrors), 0, 200);
             }
             return back()->withErrors(['images' => $debugMsg])->withInput();
         }
@@ -308,10 +308,7 @@ class ComplaintController extends Controller
                 return Category::whereNull('parent_id')->get();
             }),
             'filters' => $request->only(['status', 'category_id', 'search', 'sort']),
-            'overdueCount' => Complaint::whereIn('status', ['pending', 'processing'])
-                ->whereNotNull('estimated_completion_date')
-                ->whereDate('estimated_completion_date', '<', now()->toDateString())
-                ->count(),
+            'overdueCount' => $this->getOverdueCount(),
         ]);
     }
 
@@ -427,10 +424,7 @@ class ComplaintController extends Controller
             'categories' => $categories,
             'filters' => $request->only(['search', 'sort', 'status']),
             'worstFacilities' => $worstFacilities,
-            'overdueCount' => Complaint::whereIn('status', ['pending', 'processing'])
-                ->whereNotNull('estimated_completion_date')
-                ->whereDate('estimated_completion_date', '<', now()->toDateString())
-                ->count(),
+            'overdueCount' => $this->getOverdueCount(),
         ]);
     }
 
@@ -461,6 +455,7 @@ class ComplaintController extends Controller
         // Menghapus cache dashboard admin
         Cache::forget('admin_dashboard_stats');
         Cache::forget('categories_dashboard');
+        Cache::forget('overdue_complaint_count');
 
         return redirect()->back()->with('message', 'Laporan berhasil dihapus!');
     }
@@ -473,6 +468,17 @@ class ComplaintController extends Controller
             return $matches[1];
         }
         return null;
+    }
+
+    // Helper: Menghitung jumlah laporan yang melebihi estimasi waktu (cached 30 detik)
+    private function getOverdueCount(): int
+    {
+        return Cache::remember('overdue_complaint_count', 30, function () {
+            return Complaint::whereIn('status', ['pending', 'processing'])
+                ->whereNotNull('estimated_completion_date')
+                ->whereDate('estimated_completion_date', '<', now()->toDateString())
+                ->count();
+        });
     }
 
     // Admin: Memproses perubahan status pengaduan dan menembak notifikasi
@@ -501,6 +507,7 @@ class ComplaintController extends Controller
 
         // Menghapus cache dashboard setelah terjadi perubahan status
         Cache::forget('admin_dashboard_stats');
+        Cache::forget('overdue_complaint_count');
 
         // Mengirimkan notifikasi push ke pengguna
         try {
