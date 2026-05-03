@@ -18,38 +18,44 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Konfirmasi Password" />
+  <GuestLayout>
+    <Head title="Konfirmasi Password" />
 
-        <div class="mb-4 text-sm text-gray-600">
-            Ini adalah area aman dari aplikasi. Silakan konfirmasi password
-            Anda sebelum melanjutkan.
-        </div>
+    <div class="mb-4 text-sm text-gray-600">
+      Ini adalah area aman dari aplikasi. Silakan konfirmasi password
+      Anda sebelum melanjutkan.
+    </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                    autofocus
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+    <form @submit.prevent="submit">
+      <div>
+        <InputLabel
+          for="password"
+          value="Password"
+        />
+        <TextInput
+          id="password"
+          v-model="form.password"
+          type="password"
+          class="mt-1 block w-full"
+          required
+          autocomplete="current-password"
+          autofocus
+        />
+        <InputError
+          class="mt-2"
+          :message="form.errors.password"
+        />
+      </div>
 
-            <div class="mt-4 flex justify-end">
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Konfirmasi
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+      <div class="mt-4 flex justify-end">
+        <PrimaryButton
+          class="ms-4"
+          :class="{ 'opacity-25': form.processing }"
+          :disabled="form.processing"
+        >
+          Konfirmasi
+        </PrimaryButton>
+      </div>
+    </form>
+  </GuestLayout>
 </template>
