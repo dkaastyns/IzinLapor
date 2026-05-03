@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'email' => [
                 'required',
                 'string',
@@ -49,6 +49,17 @@ class RegisteredUserController extends Controller
                 },
             ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'name.max' => 'Nama lengkap tidak boleh lebih dari 255 karakter.',
+            'phone.required' => 'Nomor telepon wajib diisi.',
+            'phone.regex' => 'Nomor telepon hanya boleh berisi angka.',
+            'phone.max' => 'Nomor telepon tidak boleh lebih dari 20 digit.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.unique' => 'Alamat email sudah terdaftar.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
         ]);
 
         $user = User::create([

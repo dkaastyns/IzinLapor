@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'email' => [
                 'required',
                 'string',
@@ -31,6 +31,21 @@ class ProfileUpdateRequest extends FormRequest
                     }
                 },
             ],
+        ];
+    }
+
+    // Pesan validasi dalam Bahasa Indonesia
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'name.max' => 'Nama lengkap tidak boleh lebih dari 255 karakter.',
+            'phone.required' => 'Nomor telepon wajib diisi.',
+            'phone.regex' => 'Nomor telepon hanya boleh berisi angka.',
+            'phone.max' => 'Nomor telepon tidak boleh lebih dari 20 digit.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.unique' => 'Alamat email sudah digunakan.',
         ];
     }
 }

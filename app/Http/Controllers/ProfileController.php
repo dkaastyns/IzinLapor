@@ -41,6 +41,9 @@ class ProfileController extends Controller
     {
         $request->validate([
             'password' => ['required', 'current_password'],
+        ], [
+            'password.required' => 'Kata sandi wajib diisi untuk menghapus akun.',
+            'password.current_password' => 'Kata sandi yang dimasukkan salah.',
         ]);
 
         $user = $request->user();

@@ -27,6 +27,16 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    // Pesan validasi dalam Bahasa Indonesia
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'password.required' => 'Kata sandi wajib diisi.',
+        ];
+    }
+
     // Mencoba melakukan autentikasi dengan kredensial pengguna
     public function authenticate(): void
     {

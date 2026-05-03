@@ -15,6 +15,12 @@ const form = useForm({
 const showPassword = ref(false);
 const showPasswordConfirm = ref(false);
 
+// Filter input telepon: hanya angka yang diperbolehkan
+const filterPhoneInput = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '');
+    form.phone = value;
+};
+
 const submit = () => {
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
@@ -154,10 +160,14 @@ const submit = () => {
                 id="phone"
                 v-model="form.phone"
                 type="text"
+                inputmode="numeric"
+                pattern="[0-9]*"
                 class="block w-full pl-14 pr-6 py-4 bg-white border border-gray-200/70 rounded-full text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-primary-500/50 focus:ring-4 focus:ring-primary-500/10 transition-all duration-300 shadow-sm"
                 required
                 autocomplete="tel"
                 placeholder="0812xxxxxxxx"
+                @input="filterPhoneInput"
+                @keydown="(e) => { if (!/[0-9]/.test(e.key) && !['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End'].includes(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); }"
               >
             </div>
             <InputError

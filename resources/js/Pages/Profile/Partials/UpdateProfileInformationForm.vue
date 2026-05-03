@@ -25,6 +25,12 @@ const form = useForm({
     email: user.email,
 });
 
+// Filter input telepon: hanya angka yang diperbolehkan
+const filterPhoneInput = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '');
+    form.phone = value;
+};
+
 const showConfirm = ref(false);
 
 const submit = () => {
@@ -99,10 +105,14 @@ const submit = () => {
             id="phone"
             v-model="form.phone"
             type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
             class="input-premium bg-white/80 w-full"
             required
             autocomplete="tel"
-            placeholder="+62 8..."
+            placeholder="08xxxxxxxxxx"
+            @input="filterPhoneInput"
+            @keydown="(e) => { if (!/[0-9]/.test(e.key) && !['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End'].includes(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); }"
           />
           <InputError
             class="mt-2"
