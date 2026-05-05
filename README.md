@@ -1,6 +1,6 @@
-# Sistem Pengaduan Fasilitas Rusak - SMAN 11 Semarang
+# IzinLapor - Sistem Pengaduan Fasilitas Rusak SMAN 11 Semarang
 
-Aplikasi pelaporan dan manajemen keluhan fasilitas sekolah yang dibangun khusus untuk memudahkan siswa-siswi SMAN 11 Semarang melaporkan kerusakan infrastruktur secara digital, efisien, dan transparan.
+IzinLapor adalah aplikasi berbasis website untuk pelaporan dan manajemen keluhan fasilitas sekolah. Aplikasi ini dirancang khusus untuk memfasilitasi siswa-siswi SMAN 11 Semarang dalam melaporkan kerusakan infrastruktur secara digital, efisien, dan transparan.
 
 ## Fitur Utama
 
