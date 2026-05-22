@@ -155,6 +155,12 @@ const openUpdateModal = (complaint) => {
 
 const submitStatusUpdate = () => {
     if (!isOnline.value) { showOfflineToast('update'); return; }
+    // Pastikan progress sesuai status sebelum submit
+    if (statusForm.status === 'resolved' || statusForm.status === 'rejected') {
+        statusForm.progress = 100;
+    } else if (statusForm.status === 'pending') {
+        statusForm.progress = 0;
+    }
     statusForm.patch(route('admin.complaints.status', selectedComplaint.value.id), {
         onSuccess: () => {
             showModal.value = false;
@@ -162,6 +168,7 @@ const submitStatusUpdate = () => {
         },
     });
 };
+
 
 // Detail Panel
 const showDetail = ref(false);
@@ -1421,12 +1428,34 @@ function getAvatarColor(name) {
               <div class="bg-white/80 backdrop-blur-sm rounded-[1.5rem] p-5 shadow-sm border border-white">
                 <div class="flex items-center justify-between mb-4">
                   <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">PROGRESS PENYELESAIAN</label>
-                  <div class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-bold uppercase tracking-wider h-5 flex items-center">
-                    {{ statusForm.progress }}% SELESAI
+                  <div
+                    class="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider h-5 flex items-center"
+                    :class="{
+                      'bg-emerald-50 text-emerald-600': statusForm.status === 'resolved' || statusForm.status === 'rejected',
+                      'bg-violet-50 text-violet-600': statusForm.status === 'processing',
+                      'bg-gray-100 text-gray-400': statusForm.status === 'pending',
+                    }"
+                  >
+                    {{ statusForm.status === 'resolved' || statusForm.status === 'rejected' ? '100' : statusForm.status === 'pending' ? '0' : statusForm.progress }}% SELESAI
                   </div>
                 </div>
-                                
-                <div class="relative pb-2">
+
+                <!-- Status: Menunggu → 0% otomatis, tidak bisa diubah -->
+                <div v-if="statusForm.status === 'pending'" class="space-y-2">
+                  <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                    <div class="h-full rounded-full bg-gray-300 transition-all duration-500" style="width: 0%" />
+                  </div>
+                  <div class="flex justify-between px-1 text-[10px] font-medium text-gray-400 italic">
+                    <span>Tahap Awal</span>
+                    <span>Serah Terima</span>
+                  </div>
+                  <p class="text-[9px] text-gray-400 mt-1 font-medium bg-gray-50 p-1.5 rounded-lg border border-gray-100">
+                    ⏳ Progress 0% saat status Menunggu. Ubah ke Diproses untuk menyesuaikan.
+                  </p>
+                </div>
+
+                <!-- Status: Diproses → slider bisa diatur -->
+                <div v-else-if="statusForm.status === 'processing'" class="relative pb-2">
                   <div class="relative pt-2">
                     <input
                       v-model="statusForm.progress"
@@ -1436,19 +1465,32 @@ function getAvatarColor(name) {
                       step="5"
                       class="ref-progress-slider relative z-10"
                       :style="`background: linear-gradient(to right, #a855f7 0%, #d946ef ${statusForm.progress}%, #e5e7eb ${statusForm.progress}%, #e5e7eb 100%);`"
-                      :disabled="statusForm.status === 'resolved' || statusForm.status === 'rejected'"
-                      :class="{'opacity-50 cursor-not-allowed': statusForm.status === 'resolved' || statusForm.status === 'rejected'}"
                     >
                   </div>
                   <div class="flex justify-between mt-2 px-1 text-[10px] font-medium text-gray-400 italic">
                     <span>Tahap Awal</span>
                     <span>Serah Terima</span>
                   </div>
+                </div>
+
+                <!-- Status: Selesai / Ditolak → 100% otomatis, tidak bisa diubah -->
+                <div v-else class="space-y-2">
+                  <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                    <div
+                      class="h-full rounded-full transition-all duration-700"
+                      :class="statusForm.status === 'resolved' ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : 'bg-gradient-to-r from-rose-400 to-rose-500'"
+                      style="width: 100%"
+                    />
+                  </div>
+                  <div class="flex justify-between px-1 text-[10px] font-medium text-gray-400 italic">
+                    <span>Tahap Awal</span>
+                    <span>Serah Terima</span>
+                  </div>
                   <p
-                    v-if="statusForm.status === 'resolved' || statusForm.status === 'rejected'"
-                    class="text-[9px] text-amber-600 mt-2 font-medium bg-amber-50/80 p-1.5 rounded-lg border border-amber-100/50"
+                    class="text-[9px] mt-1 font-medium p-1.5 rounded-lg border"
+                    :class="statusForm.status === 'resolved' ? 'text-emerald-600 bg-emerald-50/80 border-emerald-100/50' : 'text-rose-600 bg-rose-50/80 border-rose-100/50'"
                   >
-                    ℹ️ Progress otomatis 100% untuk status Selesai/Ditolak.
+                    {{ statusForm.status === 'resolved' ? '✅ Progress otomatis 100% — laporan selesai.' : '❌ Progress otomatis 100% — laporan ditolak.' }}
                   </p>
                 </div>
               </div>
